@@ -14,4 +14,4 @@ const UserSchema = new mongooseConn.Schema({
       },
 })
 
-module.exports = mongooseConn.model.Users || mongooseConn.model("Users", UserSchema)
+module.exports = mongooseConn.model.Users || mongooseConn.model("users", UserSchema)
