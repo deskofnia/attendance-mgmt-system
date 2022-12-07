@@ -1,17 +1,16 @@
 const mongooseConn = require("mongoose");
-const UserSchema = new mongooseConn.Schema({
 
+const UserSchema = new mongooseConn.Schema({
     email: {
         type: String,
-        required: [true, "Please provide an Email!"],
-        unique: [true, "Email Exist"],
+        required: true,
+        unique: true,
       },
-    
       password: {
         type: String,
-        required: [true, "Please provide a password!"],
+        required: true,
         unique: false,
       },
 })
 
-module.exports = mongooseConn.model.Users || mongooseConn.model("users", UserSchema)
+module.exports = mongooseConn.model("users", UserSchema)

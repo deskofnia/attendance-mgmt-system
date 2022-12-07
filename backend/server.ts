@@ -4,6 +4,7 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 const dbConnection = require("./db/db.config");
 const bcrypt = require("bcrypt");
+import routes from './routes/routes';
 
 
 // execute database connection
@@ -14,7 +15,7 @@ const port = 5000;
 
 app.use(cors());
 app.use(express.json());   //convert body into json
-app.use("/api", Routes);
+app.use("/api", routes);
 
 app.get("/", (req:any, res:any) => {
   res.json({ message: "Welcome to my application." });
@@ -64,16 +65,6 @@ app.post("/register", (request:any, response:any) => {
 app.post("/login", (request:any, response:any) => {
   // check if email exists
   
-});
-
-// free endpoint
-app.get("/free-endpoint", (request:any, response:any) => {
-  response.json({ message: "You are free to access me anytime" });
-});
-
-// authentication endpoint
-app.get("/auth-endpoint", (request:any, response:any) => {
-  response.json({ message: "You are authorized to access me" });
 });
 
 app.listen(port, ()=>{
