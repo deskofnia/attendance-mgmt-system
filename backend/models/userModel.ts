@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema<IUser>({
         unique: false,
       },
       role: {
-        type: String, default: 'user'
+        type: String, default: "user"
       }
 })
 

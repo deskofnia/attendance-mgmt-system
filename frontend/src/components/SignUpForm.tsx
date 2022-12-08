@@ -3,18 +3,24 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SignUpschema } from '../validators/schema';
 import { ISignUp } from "../Interfaces/commonInterfaces";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 export default function SignUp() {
   const { register, handleSubmit, formState: { errors } } = useForm<ISignUp>({
     resolver: yupResolver(SignUpschema)
   });
-  // const onSubmit = (data:ISignUp) => console.log(data);
-
+  
+  const navigate = useNavigate();
+  
   const onSubmit = (data:ISignUp) => {
     axios.post("http://localhost:5000/api/register",data)
-    .then((res) => console.log(res));
-    // console.log(data, res);
+    .then((res) =>{
+      console.log(res)
+      alert("User Added Successfully");
+
+      navigate('/login');
+    });
   };
 
   return (

@@ -3,17 +3,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Loginschema } from '../validators/schema';
 import { ILogIn } from "../Interfaces/commonInterfaces";
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 export default function LogIn() {
   const { register, handleSubmit, formState: { errors } } = useForm<ILogIn>({
     resolver: yupResolver(Loginschema)
   });
-  // const onSubmit = (data:ILogIn) => console.log(data);
+
+  const navigate = useNavigate();
 
   const onSubmit = (data:ILogIn) => {
     axios.post("http://localhost:5000/api/login",data)
-    .then((res) => console.log(res));
-    // console.log(data, res);
+    .then((res) => {
+      console.log(res);
+      alert("Logged In Successfully");
+
+      navigate('/');
+    });
   };
 
 
