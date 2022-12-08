@@ -4,10 +4,11 @@ import { User } from '../models/userModel';
 
 
 export default async function signup(req: Request, res: Response){
-    const password1 = req.body.password;
-    const { email, role } = req.body;
+    const { email } = req.body;
+    let { role } = req.body;
+    role = 'user';
 
-    const password = await bcrypt.hash(password1, 10);
+    const password = await bcrypt.hash(req.body.password, 10);
 
     // Create New User
     const user = new User({email, password, role});
@@ -21,5 +22,4 @@ export default async function signup(req: Request, res: Response){
 
     console.log("User Created: ", user);
 
-    // return("User not found")
 }

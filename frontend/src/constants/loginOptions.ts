@@ -1,4 +1,4 @@
-export const loginOptions = [
+const loginOptions = [
     {
         title: 'Admin Login',
         url: '/login/admin',
@@ -8,3 +8,5 @@ export const loginOptions = [
         url: '/login/user',
     }
 ] 
+
+export default loginOptions;
