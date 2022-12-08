@@ -38,8 +38,8 @@ export default function Header() {
         unmountOnExit
       >
         <nav className="Nav">
-          <a href="/">Home</a>
-          <a href="/">Articles</a>
+          <a href="/">Profile</a>
+          <a href="/">Change Password</a>
           <a href="/">About</a>
           <button>Logout</button>
         </nav>

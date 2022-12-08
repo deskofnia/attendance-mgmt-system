@@ -48,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-transition-group": "^4.4.5",
     "typings-for-css-modules-loader": "^1.7.0"
   }
 }
