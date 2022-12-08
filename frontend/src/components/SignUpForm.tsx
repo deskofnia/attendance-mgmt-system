@@ -4,6 +4,8 @@ import { SignUpschema } from '../validators/schema';
 import { ISignUp } from "../Interfaces/commonInterfaces";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function SignUp() {
@@ -17,7 +19,18 @@ export default function SignUp() {
     axios.post("http://localhost:5000/api/register",data)
     .then((res) =>{
       console.log(res)
-      alert("User Added Successfully");
+      // alert("User Added Successfully");
+
+      toast('User Added Successfully', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
 
       navigate('/login');
     });
@@ -38,6 +51,19 @@ export default function SignUp() {
       <p>{errors.password?.message}</p>
       
       <button type="submit">Sign Up</button>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        />
+      <ToastContainer />
     </form>
   );
 }
