@@ -1,6 +1,7 @@
-const mongooseConn = require("mongoose");
+import mongoose from "mongoose";
+import { IUser } from "../Interfaces/schemaInterfaces";
 
-const UserSchema = new mongooseConn.Schema({
+const userSchema = new mongoose.Schema<IUser>({
     email: {
         type: String,
         required: true,
@@ -11,6 +12,9 @@ const UserSchema = new mongooseConn.Schema({
         required: true,
         unique: false,
       },
+      role: {
+        type: String
+      }
 })
 
-module.exports = mongooseConn.model("users", UserSchema)
+export const User = mongoose.model<IUser>("users", userSchema)

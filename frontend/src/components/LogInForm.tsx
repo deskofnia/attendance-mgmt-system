@@ -1,25 +1,25 @@
-import './css/login.css';
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Loginschema } from '../validators/schema';
+import { ILogIn } from "../Interfaces/commonInterfaces";
 
-function LogIn() {
-    return (
-        <div className='login'>
-          <form action="">
-            <h3> Login </h3>
-            <label htmlFor="mail">Email</label><br/>
-            <input type="email" id="mail" required />
-            <br/>
-            <label htmlFor="pwd">Password</label><br/>
-            <input type="password" id="pwd"/>
-            <br/>
-            <input type="checkbox" id="check"/>
-            <label htmlFor="check">Remember me</label>
-            <br/>
-            <a href="./forget page.html" target="_self">Forgot Password</a>
-            <br/><br/>
-            <span>Don't have any account ? </span>
-          </form>
-        </div>
-    );
+export default function LogIn() {
+  const { register, handleSubmit, formState: { errors } } = useForm<ILogIn>({
+    resolver: yupResolver(Loginschema)
+  });
+  const onSubmit = (data:ILogIn) => console.log(data);
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <label>Email</label>
+      <input {...register("email")} />
+      <p>{errors.email?.message}</p>
+        
+      <label>Password</label>
+      <input {...register("password")} />
+      <p>{errors.password?.message}</p>
+
+      <button type="submit">Sign Up</button>
+    </form>
+  );
 }
-
-export default LogIn;

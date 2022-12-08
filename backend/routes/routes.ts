@@ -1,13 +1,12 @@
 import {Router} from 'express';
 
-import LoginController from './';
-import RegisterController from './';
+import {LogIn} from '../controllers/LoginController';
+import {SignUp} from '../controllers/RegisterController';
 
 const routes = Router();
 
-router.get('/', );
-router.post('/register', RegisterController);
-router.post('/login', LoginController);
+routes.post('/register', SignUp);
+routes.post('/login', LogIn);
 
 
 export default routes;
