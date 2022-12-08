@@ -1,13 +1,12 @@
-import React from 'react';
+import Nav from './components/Navbar';
+import Myroutes from './routes/routes';
 import './App.css';
-import LogIn from './components/LogInForm';
-import SignUp from './components/SignUpForm';
 
 function App() {
   return (
     <div className="App">
-      <LogIn/>
-      <SignUp/>
+      <Nav/>
+      <Myroutes/>
     </div>
   );
 }
