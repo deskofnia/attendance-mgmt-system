@@ -3,18 +3,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Loginschema } from '../validators/schema';
 import { ILogIn } from "../Interfaces/commonInterfaces";
 import axios from 'axios';
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/Login.css';
-import { redirect } from "react-router-dom";
+// import { redirect } from "react-router-dom";
 
 export default function LogIn() {
   const { register, handleSubmit, formState: { errors } } = useForm<ILogIn>({
     resolver: yupResolver(Loginschema)
   });
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const onSubmit = (data:ILogIn) => {
     axios.post("http://localhost:5000/api/login",data)
@@ -33,8 +33,8 @@ export default function LogIn() {
       });
     })
     setTimeout(() => {
-      redirect("/");
-    }, 3000);
+      navigate("/");
+    }, 4000);
   };
 
 

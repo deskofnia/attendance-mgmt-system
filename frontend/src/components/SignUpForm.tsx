@@ -3,23 +3,22 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SignUpschema } from '../validators/schema';
 import { ISignUp } from "../Interfaces/commonInterfaces";
 import axios from "axios";
-import { redirect } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/Signup.css'
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const { register, handleSubmit, formState: { errors } } = useForm<ISignUp>({
     resolver: yupResolver(SignUpschema)
   });
   
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   
   const onSubmit = (data:ISignUp) => {
     axios.post("http://localhost:5000/api/register",data)
     .then((res) =>{
       console.log(res)
-      // alert("User Added Successfully");
 
       toast('User Added Successfully 👽. You will be redirected to login page in 3 seconds', {
         position: "top-right",
@@ -34,8 +33,8 @@ export default function SignUp() {
 
       // navigate('/login');
       setTimeout(() => {
-        redirect("/login");
-      }, 3000);
+        navigate("/login");
+      }, 4000);
     });
   };
 
