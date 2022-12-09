@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Loginschema } from '../validators/schema';
 import { ILogIn } from "../Interfaces/commonInterfaces";
 import axios from 'axios';
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/Login.css';
@@ -20,23 +20,47 @@ export default function LogIn() {
     axios.post("http://localhost:5000/api/login",data)
     .then((res) => {
       console.log(res);
-      // const { role } = res.data.
-
-      toast('Logged In Successfully 🎉. You will be redirected to user page in 3 seconds', {
-        position: "top-center",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      const id = res.data.user._id;
+      if(res.status === 200) {
+        axios.get(`http://localhost:5000/api/getuser/:${id}`)
+        .then((res) =>{
+          console.log(res);
+        })
+        
+        // setTimeout(() => {
+        //   // if(res)
+        //   navigate("/login/user");
+        // }, 4000);
+      }
     })
-    setTimeout(() => {
-      // if(res)
-      navigate("/login/user");
-    }, 4000);
+    .catch((err) => {
+      if(err.status === 401){
+        toast('Invalid Credentials !!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+      else
+      {
+        toast('User not found !!', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    })
+    
   };
 
 
@@ -66,7 +90,18 @@ export default function LogIn() {
           />
         <ToastContainer />
       </form>
-      {/* <Outlet/> */}
     </div>
   );
 }
+
+
+// toast('Logged In Successfully 🎉. You will be redirected to user page in 3 seconds', {
+//   position: "top-center",
+//   autoClose: 3000,
+//   hideProgressBar: false,
+//   closeOnClick: true,
+//   pauseOnHover: false,
+//   draggable: true,
+//   progress: undefined,
+//   theme: "light",
+// });
