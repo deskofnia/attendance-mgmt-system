@@ -3,17 +3,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { SignUpschema } from '../validators/schema';
 import { ISignUp } from "../Interfaces/commonInterfaces";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { redirect } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import './css/Signup.css'
 
 export default function SignUp() {
   const { register, handleSubmit, formState: { errors } } = useForm<ISignUp>({
     resolver: yupResolver(SignUpschema)
   });
   
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   
   const onSubmit = (data:ISignUp) => {
     axios.post("http://localhost:5000/api/register",data)
@@ -21,23 +21,26 @@ export default function SignUp() {
       console.log(res)
       // alert("User Added Successfully");
 
-      toast('User Added Successfully', {
+      toast('User Added Successfully 👽. You will be redirected to login page in 3 seconds', {
         position: "top-right",
-        autoClose: 5000,
+        autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "dark",
+        theme: "light",
       });
 
-      navigate('/login');
+      // navigate('/login');
+      setTimeout(() => {
+        redirect("/login");
+      }, 3000);
     });
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className='Signup'>
       <label>Email</label>
       <input {...register("email")} />
       <p>{errors.email?.message}</p>
@@ -53,7 +56,7 @@ export default function SignUp() {
       <button type="submit">Sign Up</button>
       <ToastContainer
         position="top-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

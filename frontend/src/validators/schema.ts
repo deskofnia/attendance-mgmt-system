@@ -8,6 +8,6 @@ export const SignUpschema  = Yup.object().shape({
 })
 
 export const Loginschema  = Yup.object().shape({
-  email: Yup.string().email('Email is invalid').required('Email is required').test('Email', 'accents not allowed', value => validateInputEmail(value)),
-  password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required')
+  email: Yup.string().required('Email is required'),
+  password: Yup.string().required('Password is required')
 })

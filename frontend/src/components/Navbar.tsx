@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom';
+import './css/Navbar.css';
 
 
 function Nav() {
   return (
-    <nav>
-      <Link to='/'>Home</Link>
-      <Link to='/login'>SignIn</Link>
-      <Link to='/signup'>SignUp</Link>
+    <nav className='nav'>
+      <Link className='nav-link' to='/'>Home</Link>
+      <Link className='nav-link' to='/login'>SignIn</Link>
+      <Link className='nav-link' to='/signup'>SignUp</Link>
     </nav>
   );
 }
