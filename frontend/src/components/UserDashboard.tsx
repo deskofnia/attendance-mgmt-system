@@ -12,16 +12,17 @@ export default function UserDashboard() {
   }
 
   return (
-    <header className="Header">
+    <div>
+      <header className="Header">
       <h3 className="Logo" >User Panel</h3>
         <nav className="Nav">
           <Link to="profile">Profile</Link>
           <Link to="changepassword">Change Password</Link>
-          
           <button onClick={logout}>Logout</button>
         </nav>
-        <Outlet/>
-    </header>
+      </header>
+      {/* <Outlet/> */}
+    </div>
     
   );
 }

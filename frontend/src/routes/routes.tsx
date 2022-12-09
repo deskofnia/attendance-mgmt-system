@@ -10,14 +10,9 @@ function Myroutes() {
         <Routes>
           <Route path='/' element={ <h1>Home</h1> } />
           <Route path='signup' element={<SignUp/>}/>
-          <Route path='login' element={<LogIn/>}>
-            <Route path="admin" element={<h2>Admin</h2>}>
-              {/* <Route path=":adminId" element={<AdminDashboard/>}/> */}
-            </Route>
-            <Route path="user" element={<h2>User</h2>}>
-              {/* <Route path=":userId" element={<UserDashboard/>}/> */}
-            </Route>
-          </Route>
+          <Route path='login' element={<LogIn/>}/>
+          <Route path="login/admin" element={<AdminDashboard/>}/>
+          <Route path="login/user" element={<UserDashboard/>}/>
         </Routes>
       </div>
   );
