@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Loginschema } from '../validators/schema';
 import { ILogIn } from "../Interfaces/commonInterfaces";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/Login.css';
@@ -21,7 +21,7 @@ export default function LogIn() {
     .then((res) => {
       console.log(res);
       // alert("Logged In Successfully");
-      toast('Logged In Successfully 🎉. You will be redirected to home page in 3 seconds', {
+      toast('Logged In Successfully 🎉. You will be redirected to user page in 3 seconds', {
         position: "top-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -33,7 +33,7 @@ export default function LogIn() {
       });
     })
     setTimeout(() => {
-      navigate("/");
+      navigate("/login/user/:id");
     }, 4000);
   };
 
@@ -62,6 +62,7 @@ export default function LogIn() {
         theme="light"
         />
       <ToastContainer />
+      <Outlet/>
     </form>
   );
 }

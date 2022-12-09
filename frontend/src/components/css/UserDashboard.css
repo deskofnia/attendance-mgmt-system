@@ -14,7 +14,7 @@
   
   .Logo {
     grid-area: logo;
-    height: 70px;
+    height: 30px;
   }
   
   .Nav {
