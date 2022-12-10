@@ -13,12 +13,14 @@ export default function AdminDashboard() {
   }
   return (
     <header className="Header">
-      <h1 className="Logo" >Admin Panel</h1>
-        <nav className="Nav">
+      <h1 className="Logo" >Admin Panel
+      <nav className="Nav">
           <a href="/">Profile</a>
           <a href="/">Change Password</a>
           <button onClick={logout}>Logout</button>
         </nav>
+      </h1>
+        
     </header>
   );
 }

@@ -12,6 +12,7 @@ export default async function login(req: Request, res: Response) {
     console.log(user);
     if(user)
     {
+        const role1 = req.body.role;
         const compare = await bcrypt.compare(req.body.password, user.password)
         // make sure email and password match
         // create authenticate method in user model
@@ -25,7 +26,7 @@ export default async function login(req: Request, res: Response) {
 
         // return response with user and send to client
         const { _id, role, email, password } = user;
-        return res.json({token, user: {_id, role, email, password }});
+        return res.json({token, user: {_id, role, email, password }, check:role1==='user'?'user': 'admin'});
     }
     else
         return res.status(400).json({err: "User not fuond"});

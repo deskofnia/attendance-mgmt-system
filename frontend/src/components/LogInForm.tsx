@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/Login.css';
-// import { redirect } from "react-router-dom";
 
 export default function LogIn() {
   const { register, handleSubmit, formState: { errors } } = useForm<ILogIn>({
@@ -20,18 +19,42 @@ export default function LogIn() {
     axios.post("http://localhost:5000/api/login",data)
     .then((res) => {
       console.log(res);
-      const id = res.data.user._id;
-      if(res.status === 200) {
-        axios.get(`http://localhost:5000/api/getuser/:${id}`)
-        .then((res) =>{
-          console.log(res);
-        })
-        
-        // setTimeout(() => {
-        //   // if(res)
-        //   navigate("/login/user");
-        // }, 4000);
+
+      if(res.data.user.role ==="user")
+      {
+        toast('Logged In Successfully 🎉. You will be redirected to user page in 3 seconds', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+          
+        setTimeout(() => {
+          navigate("/login/user");
+        }, 4000);
       }
+      else{
+        toast('Logged In Successfully 🎉. You will be redirected to admin page in 3 seconds', {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+          
+        setTimeout(() => {
+          // if(res)
+          navigate("/login/admin");
+        }, 4000);
+      }
+      
     })
     .catch((err) => {
       if(err.status === 401){
@@ -95,13 +118,9 @@ export default function LogIn() {
 }
 
 
-// toast('Logged In Successfully 🎉. You will be redirected to user page in 3 seconds', {
-//   position: "top-center",
-//   autoClose: 3000,
-//   hideProgressBar: false,
-//   closeOnClick: true,
-//   pauseOnHover: false,
-//   draggable: true,
-//   progress: undefined,
-//   theme: "light",
-// });
+// const id = res.data.user._id;
+      // if(res.status === 200) {
+      //   axios.get(`http://localhost:5000/api/getuser/:${id}`)
+      //   .then((res) =>{
+      //     console.log(res);
+      //   })
