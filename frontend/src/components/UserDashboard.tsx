@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
-import './css/UserDashboard.css';
+import { Link, useNavigate } from "react-router-dom";
+import './css/AdminDashboard.css';
 
-export default function UserDashboard() {
+export default function AdminDashboard() {
+
   const [isLoggedIn, setIsLoggedIn ] = useState(true);
   const navigate = useNavigate();
   
@@ -10,20 +11,15 @@ export default function UserDashboard() {
     setIsLoggedIn(false);
     navigate('/login');
   }
-
   return (
     <div>
-      <header className="Header">
-      <h3 className="Logo" >User Panel</h3>
-        <nav className="Nav">
-          <Link to="profile">Profile</Link>
-          <Link to="changepassword">Change Password</Link>
-          <button onClick={logout}>Logout</button>
-        </nav>
-      </header>
-      {/* <Outlet/> */}
+      <h1>User Panel</h1>
+      <Link to="profile">Profile</Link>
+      <Link to="changepassword">Request</Link>
+      <Link to="changepassword">Change Password</Link>
+      <button onClick={logout}>Logout</button>
     </div>
-    
+
   );
 }
 

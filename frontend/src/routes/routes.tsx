@@ -10,8 +10,8 @@ function Myroutes() {
         <Routes>
           <Route path='/' element={ <h1>Home</h1> } />
           <Route path='signup' element={<SignUp/>}/>
-          <Route path='login' element={<AdminDashboard/>}/>
-          <Route path="login/admin" element={<LogIn/>}/>
+          <Route path='login' element={<LogIn/>}/>
+          <Route path="login/admin" element={<AdminDashboard/>}/>
           <Route path="login/user" element={<UserDashboard/>}/>
         </Routes>
       </div>

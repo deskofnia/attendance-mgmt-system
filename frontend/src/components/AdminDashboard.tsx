@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './css/AdminDashboard.css';
 
 export default function AdminDashboard() {
@@ -12,10 +12,13 @@ export default function AdminDashboard() {
     navigate('/login');
   }
   return (
-    <header className="Header">
-      <h1 className="panel" >Admin Panel</h1>
-      <h3>Users</h3>
-        
-    </header>
+    <div>
+      <h1>Admin Panel</h1>
+      <Link to="profile">Users</Link>
+      <Link to="changepassword">Request</Link>
+      <Link to="changepassword">Change Password</Link>
+      <button onClick={logout}>Logout</button>
+    </div>
+
   );
 }

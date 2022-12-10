@@ -21,5 +21,4 @@ export default async function signup(req: Request, res: Response){
     })
 
     console.log("User Created: ", user);
-
 }
