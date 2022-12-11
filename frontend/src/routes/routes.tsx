@@ -13,7 +13,7 @@ function Myroutes() {
           <Route path='/' element={ <Home/> } />
           <Route path='signup' element={<SignUp/>}/>
           <Route path='login' element={<LogIn/>}/>
-          <Route path="login/admin" element={<AdminDashboard/>}/>
+          <Route path="admin" element={<AdminDashboard/>}/>
           <Route path="user/user" element={<UserDashboard/>}/>
           <Route path="list" element={<List/>}/>
         </Routes>

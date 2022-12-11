@@ -2,13 +2,15 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Loginschema } from '../validators/schema';
 import { ILogIn } from "../Interfaces/commonInterfaces";
-import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import Nav from "./Navbar";
+import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/Login.css';
 
 export default function LogIn() {
+  
   const { register, handleSubmit, formState: { errors } } = useForm<ILogIn>({
     resolver: yupResolver(Loginschema)
   });
@@ -16,7 +18,7 @@ export default function LogIn() {
   const navigate = useNavigate();
 
   const onSubmit = (data:ILogIn) => {
-    axios.post("http://localhost:5000/api/login",data)
+    axios.post("http://localhost:5000/api/login", data)
     .then((res) => {
       console.log(res);
 
@@ -24,7 +26,7 @@ export default function LogIn() {
       {
         toast('Logged In Successfully 🎉. You will be redirected to user page in 3 seconds', {
           position: "top-center",
-          autoClose: 3000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
@@ -34,13 +36,13 @@ export default function LogIn() {
         });
           
         setTimeout(() => {
-          navigate("/login/user");
-        }, 4000);
+          navigate("/user");
+        }, 2000);
       }
       else{
         toast('Logged In Successfully 🎉. You will be redirected to admin page in 3 seconds', {
           position: "top-center",
-          autoClose: 3000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
@@ -50,9 +52,8 @@ export default function LogIn() {
         });
           
         setTimeout(() => {
-          // if(res)
-          navigate("/login/admin");
-        }, 4000);
+          navigate("/admin");
+        }, 2000);
       }
       
     })
@@ -60,7 +61,7 @@ export default function LogIn() {
       if(err.status === 401){
         toast('Invalid Credentials !!', {
           position: "top-center",
-          autoClose: 3000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
@@ -73,7 +74,7 @@ export default function LogIn() {
       {
         toast('User not found !!', {
           position: "top-center",
-          autoClose: 3000,
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: false,
@@ -83,12 +84,12 @@ export default function LogIn() {
         });
       }
     })
-    
   };
 
 
   return (
     <div>
+      <Nav/>
       <form className="login" onSubmit={handleSubmit(onSubmit)}>
         <label>Email</label>
         <input {...register("email")} />

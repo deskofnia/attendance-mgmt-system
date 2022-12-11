@@ -9,11 +9,11 @@ export default function AdminDashboard() {
       <div className="sidebar">
         <div className="sidebarWrapper">
           <div className="sidebarMenu">
-            <h3 className="sidebarTitle">Dashboard</h3>
+            <h3 className="sidebarTitle">Admin Dashboard</h3>
             <ul className="sidebarList">
               <li className="sidebarListItem">
                 <i className="fas fa-home"></i>
-                <Link className="sidebarLink" to="/login/admin">
+                <Link className="sidebarLink" to="/admin">
                   Home
                 </Link>
               </li>
