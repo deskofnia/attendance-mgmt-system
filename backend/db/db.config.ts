@@ -5,7 +5,7 @@ async function dbConnect() {
   // use mongoose to connect this app to our database on mongoDB using the DB_URL (connection string)
   mongoose
     .connect(
-        "mongodb+srv://dv:Unstoppable%40123@cluster0.9fffemz.mongodb.net/authDB?retryWrites=true&w=majority",
+      "mongodb+srv://dv:Unstoppable%40123@cluster0.9fffemz.mongodb.net/authDB?retryWrites=true&w=majority",
       {
         //   these are options to ensure that the connection is done properly
         useNewUrlParser: true,

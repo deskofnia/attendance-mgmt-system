@@ -6,3 +6,11 @@ export interface ILogIn{
 export interface ISignUp extends ILogIn {
     confirmPassword: string
 }
+
+export interface IUser{
+    _id: string,
+    email: string,
+    password: string,
+    role: string,
+    status: string
+}
