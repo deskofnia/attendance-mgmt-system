@@ -28,16 +28,16 @@ export const AttendanceList = () => {
             </thead>
             <tbody className=''>
             {
-                // attendance.map((value, index) => {
-                //     return (
-                //         // <tr key={index}>
-                //         //     <td>{index + 1}</td>
-                //         //     <td>{value?.date}</td>
-                //         //     <td>{value[index]?.entry}</td>
-                //         //     <td>{value[index]?.exit}</td>
-                //         // </tr>
-                //     )
-                // })
+                attendance.map((value, index) => {
+                    return (
+                        <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{value?.date}</td>
+                            <td>{value?.entry}</td>
+                            <td>{value?.exit}</td>
+                        </tr>
+                    )
+                })
             }
             </tbody>
         </table>
