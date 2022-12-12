@@ -20,7 +20,6 @@ export const ClockInAndOut = () => {
       setButtonText("Clock In"); 
     }
   }
-  
 
   useEffect(() => {
     getData();
@@ -33,7 +32,7 @@ export const ClockInAndOut = () => {
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
     }).then((res) =>{
         setAttendance(res.data);
-        });
+    });
   }
 
   async function addAttendance () {

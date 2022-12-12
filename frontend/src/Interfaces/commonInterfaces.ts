@@ -5,6 +5,7 @@ export interface ILogIn{
 }
 
 export interface ISignUp extends ILogIn {
+    username: string,
     confirmPassword: string
 }
 
