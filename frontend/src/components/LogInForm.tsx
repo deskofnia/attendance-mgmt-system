@@ -24,22 +24,37 @@ export default function LogIn() {
 
       if(res.data.user.role ==="user")
       {
-        toast('Logged In Successfully 🎉. You will be redirected to user page in 3 seconds', {
-          position: "top-center",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-          
-        setTimeout(() => {
-          navigate("/user");
-        }, 2000);
+          if(res.data.user.status === "active") {
+            toast('Logged In Successfully 🎉. You will be redirected to user page in 3 seconds', {
+              position: "top-center",
+              autoClose: 2000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: false,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+              
+            setTimeout(() => {
+              navigate("/user");
+            }, 2000);
+          }
+        else{
+          toast('Sorry Can not login !! User is Inactived by the Admin', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
       }
-      else{
+      else
+      {
         toast('Logged In Successfully 🎉. You will be redirected to admin page in 3 seconds', {
           position: "top-center",
           autoClose: 2000,
@@ -55,7 +70,7 @@ export default function LogIn() {
           navigate("/admin");
         }, 2000);
       }
-      
+    
     })
     .catch((err) => {
       if(err.status === 401){

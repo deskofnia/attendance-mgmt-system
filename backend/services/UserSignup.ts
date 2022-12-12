@@ -5,13 +5,14 @@ import { User } from '../models/userModel';
 
 export default async function signup(req: Request, res: Response){
     const { email } = req.body;
-    let { role } = req.body;
+    let { role, status } = req.body;
     role = 'user';
+    status = 'active';
 
     const password = await bcrypt.hash(req.body.password, 10);
 
     // Create New User
-    const user = new User({email, password, role});
+    const user = new User({email, password, role, status});
     // Save
     user.save((err, user) => {
     if (err) {

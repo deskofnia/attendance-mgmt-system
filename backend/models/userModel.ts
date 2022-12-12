@@ -14,6 +14,9 @@ const userSchema = new mongoose.Schema<IUser>({
       },
       role: {
         type: String,
+      },
+      status: {
+        type: String,
       }
 });
 

@@ -22,36 +22,3 @@ export default function AdminDashboard() {
 
   );
 }
-
-
-
-
-// const [isNavVisible, setNavVisibility] = useState(false);
-  // const [isSmallScreen, setIsSmallScreen] = useState(false);
-
-  // useEffect(() => {
-  //   const mediaQuery = window.matchMedia("(max-width: 700px)");
-  //   // mediaQuery.addListener();
-  //   mediaQuery.addEventListener("onchange", ()=>{
-  //     handleMediaQueryChange(mediaQuery);
-  //   })
-  //   // handleMediaQueryChange(mediaQuery);
-
-  //   return () => {
-  //     mediaQuery.removeEventListener("onchange", ()=>{
-  //       handleMediaQueryChange(mediaQuery);
-  //     });
-  //   };
-  // }, []);
-
-  // const handleMediaQueryChange = (mediaQuery: MediaQueryList) => {
-  //   if (mediaQuery.matches) {
-  //     setIsSmallScreen(true);
-  //   } else {
-  //     setIsSmallScreen(false);
-  //   }
-  // };
-
-  // const toggleNav = () => {
-  //   setNavVisibility(!isNavVisible);
-  // };
