@@ -106,6 +106,11 @@ export default function LogIn() {
     <div>
       <Nav/>
       <form className="login" onSubmit={handleSubmit(onSubmit)}>
+        
+        <label>Username</label>
+        <input {...register("username")} />
+        <p>{errors.username?.message}</p>
+
         <label>Email</label>
         <input {...register("email")} />
         <p>{errors.email?.message}</p>

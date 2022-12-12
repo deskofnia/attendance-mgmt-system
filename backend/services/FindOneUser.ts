@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
-import { ObjectId } from 'mongodb';
 import { User } from '../models/userModel';
 
 
 export default async function findone(req: Request, res: Response) {
     
-    const id = req.params.id;
-    await User.find({_id: new ObjectId(id)})
+    const id = req.query.id;
+    await User.find({_id: id})
     .then(data => {
         if (!data)
           res.status(404).send({ message: "Not found User with id " + id });

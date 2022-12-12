@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 import { IUser } from "../Interfaces/schemaInterfaces";
 
 const userSchema = new mongoose.Schema<IUser>({
+    username: {
+      type: String,
+      required: true,
+      unique: true
+    },
     email: {
         type: String,
         required: true,

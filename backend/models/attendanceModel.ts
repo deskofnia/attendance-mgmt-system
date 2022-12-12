@@ -1,20 +1,21 @@
-import mongoose from "mongoose";
-import { IUser } from "../Interfaces/schemaInterfaces";
+import mongoose, { Schema } from "mongoose";
+import { IAttendance } from "../Interfaces/schemaInterfaces";
 
-const userSchema = new mongoose.Schema<IUser>({
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-      },
-      password: {
-        type: String,
-        required: true,
-        unique: false,
-      },
-      role: {
-        type: String,
-      }
+const userSchema = new mongoose.Schema<IAttendance>({
+    
+    user_id: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "users"
+    },
+    date:{
+        type:Date,
+        default:Date.now,
+    },
+    entry:{type:Date},
+    exit:{
+      type:Date,
+    }
 });
 
-export const User = mongoose.model<IUser>("users", userSchema);
+export const User = mongoose.model<IAttendance>("attendance", userSchema);

@@ -24,8 +24,8 @@ export default async function login(req: Request, res: Response) {
         const token = jwt.sign({_id: user._id}, "JWT_SECRET")
 
         // return response with user and send to client
-        const { _id, role, email, password, status } = user;
-        return res.json({token, user: {_id, role, email, password, status }});
+        const { _id, role, email, password, status, username } = user;
+        return res.json({token, user: {_id, role, email, password, status, username }});
     }
     else
         return res.status(400).json({err: "User not fuond"});

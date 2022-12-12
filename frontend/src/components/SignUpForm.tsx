@@ -44,6 +44,10 @@ export default function SignUp() {
     <div>
         <Nav/>
         <form onSubmit={handleSubmit(onSubmit)} className='Signup'>
+        <label>Username</label>
+        <input {...register("username")}/>
+        <p>{errors.username?.message}</p>
+
         <label>Email</label>
         <input {...register("email")} />
         <p>{errors.email?.message}</p>
