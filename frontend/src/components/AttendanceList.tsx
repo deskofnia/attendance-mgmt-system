@@ -4,11 +4,11 @@ import { IAttendance } from '../Interfaces/commonInterfaces';
 
 export const AttendanceList = () => {
 
-  const [attendance, setAttendance] = useState<IAttendance[]>([]);
+  const [attendance, setAttendance] = useState([]);
   
 
   useEffect(() => {
-    axios.get<IAttendance[]>("http://localhost:5000/api/user/attendance")
+    axios.get("http://localhost:5000/api/user/attendance")
     .then((res) =>{
         console.log(res);
         setAttendance(res.data);
@@ -28,16 +28,16 @@ export const AttendanceList = () => {
             </thead>
             <tbody className=''>
             {
-                attendance.map((data, i) => {
-                    return (
-                        <tr key={i}>
-                            <td>{i + 1}</td>
-                            {/* <td>{data.date}</td>
-                            <td>{data.entry}</td>
-                            <td>{data.exit}</td> */}
-                        </tr>
-                    )
-                })
+                // attendance.map((value, index) => {
+                //     return (
+                //         // <tr key={index}>
+                //         //     <td>{index + 1}</td>
+                //         //     <td>{value?.date}</td>
+                //         //     <td>{value[index]?.entry}</td>
+                //         //     <td>{value[index]?.exit}</td>
+                //         // </tr>
+                //     )
+                // })
             }
             </tbody>
         </table>
