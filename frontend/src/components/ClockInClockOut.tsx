@@ -1,16 +1,14 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
-import { IUser } from '../Interfaces/commonInterfaces';
+import { IAttendance } from '../Interfaces/commonInterfaces';
 
 
 export const ClockInAndOut = () => {
 
     
   
-  const [users, setUsers] = useState<IUser[]>([]);
+  const [attendance, setAttendance] = useState<IAttendance[]>([]);
   
-  const navigate = useNavigate();
 
   useEffect(() => {
     getData();
@@ -19,33 +17,28 @@ export const ClockInAndOut = () => {
   const getData = async ()=>{
     await axios({
       method: "get",
-      url: "http://localhost:5000/api/userslist",
+      url: "http://localhost:5000/api//user/attendance",
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
     }).then((res) =>{
-        setUsers(res.data);
-        console.log("Response UserList: ", res)
+        setAttendance(res.data);
         });
-    }
-
-  async function dashboard() {
-    navigate('/admin');
   }
 
-  async function acceptReq (id:any) {
+  async function addAttendance (id:any) {
 
     await axios({
-      method: "put",
-      url: `http://localhost:5000/api/editstatus?id=${id}`,
+      method: "post",
+      url: `http://localhost:5000/api/addattendance?id=${id}`,
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
       data: { status: 'Active'},
     }).then((res)=> {
       getData();
     });
   }
-  async function rejectReq (id:any) {
+  async function updateAttendance(id:any) {
     await axios({
       method: "put",
-      url: `http://localhost:5000/api/editstatus?id=${id}`,
+      url: `http://localhost:5000/api/updateattendance?id=${id}`,
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
       data: { status: 'Inactive'},
     }).then((res)=> {
@@ -68,18 +61,18 @@ export const ClockInAndOut = () => {
             </thead>
             <tbody className=''>
             {
-                users.map((user, index) => {
+                attendance.map((user, index) => {
                     return (
                         <tr key={index}>
                             <td>{index + 1}</td>
-                            <td>{user.username}</td>
-                            <td>{user.email}</td>
+                            <td>{user.date}</td>
+                            <td>{user.entry}</td>
                             <td>{user._id}</td>
                             <td>{user.status}</td>
-                            <td>
-                                <button onClick={(e: React.SyntheticEvent<EventTarget>) => acceptReq(users[index]?._id)} > Active </button>
-                                <button onClick={(e: React.SyntheticEvent<EventTarget>) => rejectReq(users[index]?._id)} > Inactive </button>
-                            </td>
+                            {/* <td>
+                                <button onClick={(e: React.SyntheticEvent<EventTarget>) => addAttendance(attendance[index]?._id)} > Active </button>
+                                <button onClick={(e: React.SyntheticEvent<EventTarget>) => updateAttendance(attendance[index]?._id)} > Inactive </button>
+                            </td> */}
                             
                         </tr>
                     )
@@ -87,9 +80,6 @@ export const ClockInAndOut = () => {
             }
             </tbody>
         </table>
-        <>
-        <button onClick={dashboard} >Dashboard</button>
-        </>
     </div>
   )
   
