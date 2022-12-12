@@ -13,7 +13,7 @@ const port = 5000;
 
 app.use(cors());
 app.use(express.json());   //convert body into json
-app.use("/api/", routes);
+app.use("/api", routes);
 
 
 app.listen(port, ()=>{

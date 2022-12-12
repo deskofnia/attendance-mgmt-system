@@ -4,16 +4,22 @@ import { Attendance } from '../models/attendanceModel';
 export default async function attendacelist(req: Request, res: Response) {
     await Attendance.find()
         .then(() => {
-            // Attendance.aggregate([
-            //     {
-            //         $lookup:{
-            //             from:"users",
-            //             localField:"user_id",
-            //             foreignField
-    
-            //         }
-            //     },
-            // ])
+            Attendance.aggregate([
+                {
+                    $lookup:{
+                        from:"users",
+                        localField:"user_id",
+                        foreignField: "_id",
+                        as: "attendance"
+                    }
+                },
+                {
+                    $unwind:{
+                        path:'$attendace',
+                        preserveNullAndEmptyArrays: true
+                    }
+                }
+            ])
         })
         .catch(err => {
             res.status(500).send({ message: err.message || "error occured" });
