@@ -1,18 +1,17 @@
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ClockInAndOut } from "./ClockInClockOut";
 import './css/AdminDashboard.css';
 
 export default function AdminDashboard() {
 
-  const [isLoggedIn, setIsLoggedIn ] = useState(true);
   const navigate = useNavigate();
   
   const logout = () => {
-    setIsLoggedIn(false);
     navigate('/login');
   }
   return (
     <div>
+      <ClockInAndOut/>
       <h1>User Panel</h1>
       <Link to="profile">Profile</Link>
       <Link to="changepassword">Request</Link>

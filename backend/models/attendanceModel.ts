@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema<IAttendance>({
       ref: "users"
     },
     date:{
-        type:Date,
+        type:String,
         // default:Date.now,
     },
     entry:{

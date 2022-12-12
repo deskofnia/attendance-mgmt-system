@@ -24,7 +24,7 @@ export default function LogIn() {
 
       if(res.data.user.role ==="user")
       {
-          if(res.data.user.status === "active") {
+          if(res.data.user.status === "Active") {
             toast('Logged In Successfully 🎉. You will be redirected to user page in 3 seconds', {
               position: "top-center",
               autoClose: 2000,
@@ -137,11 +137,3 @@ export default function LogIn() {
     </div>
   );
 }
-
-
-// const id = res.data.user._id;
-      // if(res.status === 200) {
-      //   axios.get(`http://localhost:5000/api/getuser/:${id}`)
-      //   .then((res) =>{
-      //     console.log(res);
-      //   })

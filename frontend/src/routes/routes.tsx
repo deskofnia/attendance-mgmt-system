@@ -12,12 +12,12 @@ function Myroutes() {
       <div>
         <Routes>
           <Route path='/' element={ <Home/> } />
-          <Route path='signup' element={<SignUp/>}/>
-          <Route path='login' element={<LogIn/>}/>
-          <Route path="admin" element={<AdminDashboard/>}/>
-          <Route path="user" element={<UserDashboard/>}/>
-          <Route path="userlist" element={<UserList/>}/>
-          <Route path="user/attendance" element={<AttendanceList/>}/>
+          <Route path='/signup' element={<SignUp/>}/>
+          <Route path='/login' element={<LogIn/>}/>
+          <Route path="/admin" element={<AdminDashboard/>}/>
+          <Route path="/user" element={<UserDashboard/>}/>
+          <Route path="/userslist" element={<UserList/>}/>
+          <Route path="/user/attendance" element={<AttendanceList/>}/>
         </Routes>
       </div>
   );

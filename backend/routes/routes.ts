@@ -5,6 +5,7 @@ import {SignUp} from '../controllers/RegisterController';
 import {FindOneUser} from '../controllers/FindOneUserController';
 import { AttendanceList } from '../controllers/ListAttendanceController';
 import { AddAttendance } from '../controllers/AddAttendanceController';
+import { EditStatus } from '../controllers/EditStatusController';
 
 const routes = Router();
 
@@ -14,6 +15,7 @@ routes.get('/userslist', ListUsers);
 routes.get('/finduser/:id', FindOneUser);
 routes.get('/user/attendance', AttendanceList);
 routes.post('/user/addattendance', AddAttendance);
+routes.route('/editstatus').put(EditStatus); 
 
 
 export default routes;

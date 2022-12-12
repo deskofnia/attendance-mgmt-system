@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose, { ConnectOptions } from "mongoose";
 // require('dotenv').config()
 
 async function dbConnect() {
@@ -10,8 +10,7 @@ async function dbConnect() {
         //   these are options to ensure that the connection is done properly
         useNewUrlParser: true,
         useUnifiedTopology: true
-      }
-    )
+      }as ConnectOptions)
     .then(() => {
       console.log("Successfully connected to MongoDB Atlas!");
     })
