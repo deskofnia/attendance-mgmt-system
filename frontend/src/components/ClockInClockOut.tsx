@@ -47,9 +47,9 @@ export const ClockInAndOut = () => {
 }
 
   return (
-    <div className=''>
+    <div>
         <table >
-            <thead className=''>
+            <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Username</th>
@@ -59,7 +59,7 @@ export const ClockInAndOut = () => {
                     <th></th>
                 </tr>
             </thead>
-            <tbody className=''>
+            <tbody>
             {
                 attendance.map((user, index) => {
                     return (
