@@ -43,7 +43,10 @@ export const UserList = () => {
                             <td>{user.username}</td>
                             <td>{user.email}</td>
                             <td>{user._id}</td>
-                            <td>{user.status}</td>
+                            <td>{user.status}
+                                <button>Act</button>
+                                <button>InAct</button>
+                            </td>
                         </tr>
                     )
                 })
