@@ -3,11 +3,9 @@ import { Attendance } from '../models/attendanceModel';
 
 
 export default async function addAttendance(req: Request, res: Response){
-    console.log("inside service");
 
-    const { user_id, date, entry, exit} = req.body;
-
-    const attendance = await Attendance.create({ user_id, date, entry, exit});
+    const { user_id, date, entry} = req.body;
+    const attendance = await Attendance.create({ user_id, date, entry });
 
     // Save
     await attendance.save((err, user) => {

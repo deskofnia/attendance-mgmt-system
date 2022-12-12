@@ -8,7 +8,7 @@ import Nav from "./Navbar";
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 import './css/Login.css';
- 
+
 export default function LogIn() {
   
   const { register, handleSubmit, formState: { errors } } = useForm<ILogIn>({
@@ -106,10 +106,6 @@ export default function LogIn() {
     <div>
       <Nav/>
       <form className="login" onSubmit={handleSubmit(onSubmit)}>
-        
-        <label>Username</label>
-        <input {...register("username")} />
-        <p>{errors.username?.message}</p>
 
         <label>Email</label>
         <input {...register("email")} />

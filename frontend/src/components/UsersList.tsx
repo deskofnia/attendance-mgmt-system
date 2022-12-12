@@ -23,14 +23,14 @@ export const UserList = () => {
     }).then((res) =>{
         setUsers(res.data);
         console.log("Response UserList: ", res)
-        });
+      });
     }
 
   async function dashboard() {
     navigate('/admin');
   }
 
-  async function acceptReq (id:any) {
+  async function acceptReq (id:string) {
 
     await axios({
       method: "put",
@@ -41,7 +41,7 @@ export const UserList = () => {
       getData();
     });
   }
-  async function rejectReq (id:any) {
+  async function rejectReq (id:string) {
     await axios({
       method: "put",
       url: `http://localhost:5000/api/editstatus?id=${id}`,

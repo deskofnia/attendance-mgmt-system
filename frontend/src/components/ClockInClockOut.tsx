@@ -4,10 +4,22 @@ import { IAttendance } from '../Interfaces/commonInterfaces';
 
 
 export const ClockInAndOut = () => {
-
-    
   
   const [attendance, setAttendance] = useState<IAttendance[]>([]);
+
+  const [buttonText, setButtonText] = useState("Clock In");
+
+  const toggle = (id:string) => {
+    if(buttonText==="Clock In")
+    {
+      addAttendance();
+      setButtonText("Clock Out");
+    }
+    else{
+      updateAttendance(id)
+      setButtonText("Clock In"); 
+    }
+  }
   
 
   useEffect(() => {
@@ -24,56 +36,54 @@ export const ClockInAndOut = () => {
         });
   }
 
-  async function addAttendance (id:any) {
+  async function addAttendance () {
 
     await axios({
       method: "post",
-      url: `http://localhost:5000/api/addattendance?id=${id}`,
+      url: 'http://localhost:5000/api/user/addattendance',
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
-      data: { status: 'Active'},
+      data: { date: new Date(), entry: new Date()},
     }).then((res)=> {
+      console.log(res);
       getData();
     });
   }
-  async function updateAttendance(id:any) {
+  async function updateAttendance(id:string) {
     await axios({
       method: "put",
-      url: `http://localhost:5000/api/updateattendance?id=${id}`,
+      url: `http://localhost:5000/api/user/updateattendance?${id}`,
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
-      data: { status: 'Inactive'},
+      data: { exit: new Date() },
     }).then((res)=> {
+        console.log(res);
         getData();
     });
 }
 
   return (
-    <div>
+    <div>        
         <table >
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">ID</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Entry Time</th>
+                    <th scope="col">Exit Time</th>
+                    {/* <th scope="col">ID</th> */}
                     <th></th>
                 </tr>
             </thead>
             <tbody>
             {
-                attendance.map((user, index) => {
+                attendance.map((data, index) => {
                     return (
                         <tr key={index}>
                             <td>{index + 1}</td>
-                            <td>{user.date}</td>
-                            <td>{user.entry}</td>
-                            <td>{user._id}</td>
-                            <td>{user.status}</td>
-                            {/* <td>
-                                <button onClick={(e: React.SyntheticEvent<EventTarget>) => addAttendance(attendance[index]?._id)} > Active </button>
-                                <button onClick={(e: React.SyntheticEvent<EventTarget>) => updateAttendance(attendance[index]?._id)} > Inactive </button>
-                            </td> */}
-                            
+                            <td>{data.date}</td>
+                            <td>{data.entry}</td>
+                            <td>{data.exit}</td>
+                            {/* <td>{data._id}</td> */}
+                            <td><button onClick={() => toggle(data_id)}>{buttonText}</button></td>
                         </tr>
                     )
                 })
@@ -83,39 +93,4 @@ export const ClockInAndOut = () => {
     </div>
   )
   
-  
-  
-  
-  
-  // const [date, setDate] = useState(new Date());
-
-  //   const [buttonText, setButtonText] = useState("Clock In");
-
-  //   const toggle = () => {
-  //     if(buttonText==="Clock In")
-  //     {
-        
-  //       axios.post("http://localhost:5000/api/user/addattendance", {date: new Date(), entry: new Date()})
-  //       .then((res) => {
-          
-  //     });
-
-  //     setButtonText("Clock Out");
-  //   }
-  //   else{
-
-  //     axios.post("http://localhost:5000/api/user/updateattendance", {exit: new Date()})
-  //       .then((res) => {
-  //         console.log(res);
-  //     });
-      
-  //     setButtonText("Clock In"); 
-  //   }
-  //   }
-    
-  // return (
-  //   <div>
-  //       <button onClick={toggle}>{buttonText}</button>
-  //   </div>
-  // )
 }

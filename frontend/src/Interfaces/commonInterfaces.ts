@@ -1,5 +1,5 @@
+
 export interface ILogIn{
-    username: string,
     email: string,
     password: string,
 }
@@ -17,8 +17,8 @@ export interface IUser{
     status: string
 }
 export interface IAttendance{
-    user_id?: string,
-    date: Date,
-    entry?: Date,
-    exit?: Date,
+    user_id: string,
+    date: Date | string,
+    entry: Date | string,
+    exit: Date | string,
 }
