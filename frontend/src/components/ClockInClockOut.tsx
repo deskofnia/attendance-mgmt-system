@@ -91,5 +91,4 @@ export const ClockInAndOut = () => {
         </table>
     </div>
   )
-  
 }
