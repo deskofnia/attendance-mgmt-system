@@ -17,8 +17,8 @@ export interface IUser{
     status: string
 }
 export interface IAttendance{
-    user_id: string,
+    user_id?: string,
     date: Date,
-    entry: Date,
-    exit: Date,
+    entry?: Date,
+    exit?: Date,
 }

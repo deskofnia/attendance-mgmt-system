@@ -9,13 +9,15 @@ const userSchema = new mongoose.Schema<IAttendance>({
       ref: "users"
     },
     date:{
-        type:String,
+        type:Date,
         // default:Date.now,
     },
-    entry:{type:String},
+    entry:{
+      type:String
+    },
     exit:{
       type:String,
     }
 });
 
-export const Attendance = mongoose.model<IAttendance>("attendance", userSchema);
+export const Attendance = mongoose.model<IAttendance>("attendances", userSchema);
