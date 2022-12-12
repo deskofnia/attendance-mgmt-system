@@ -79,11 +79,11 @@ export const ClockInAndOut = () => {
                     return (
                         <tr key={index}>
                             <td>{index + 1}</td>
-                            <td>{data.date}</td>
-                            <td>{data.entry}</td>
-                            <td>{data.exit}</td>
+                            <td>{data.date.toString()}</td>
+                            <td>{data.entry.toString()}</td>
+                            <td>{data.exit.toString()}</td>
                             {/* <td>{data._id}</td> */}
-                            <td><button onClick={() => toggle(data_id)}>{buttonText}</button></td>
+                            <td><button onClick={() => toggle(attendance[index]?._id)}>{buttonText}</button></td>
                         </tr>
                     )
                 })
