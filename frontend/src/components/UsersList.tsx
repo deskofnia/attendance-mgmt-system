@@ -1,10 +1,10 @@
-import './css/List2.css';
+import './css/UserList.css';
 import { useEffect, useState } from 'react';
 import { IUser } from '../Interfaces/commonInterfaces';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-export const List = () => {
+export const UserList = () => {
 
   const [users, setUsers] = useState<IUser[]>([]);
   
@@ -28,8 +28,8 @@ export const List = () => {
             <thead className=''>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Email</th>
                     <th scope="col">Username</th>
+                    <th scope="col">Email</th>
                     <th scope="col">ID</th>
                     <th scope="col">Status</th>
                 </tr>
@@ -40,8 +40,8 @@ export const List = () => {
                     return (
                         <tr key={i}>
                             <td>{i + 1}</td>
-                            <td>{user.email}</td>
                             <td>{user.username}</td>
+                            <td>{user.email}</td>
                             <td>{user._id}</td>
                             <td>{user.status}</td>
                         </tr>

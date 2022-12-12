@@ -1,10 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import AdminDashboard from "../components/AdminDashboard";
+import { AttendanceList } from "../components/AttendanceList";
 import { Home } from "../components/Home";
-import { List } from "../components/UsersList";
 import LogIn from "../components/LogInForm";
 import SignUp from "../components/SignUpForm";
 import UserDashboard from "../components/UserDashboard";
+import { UserList } from "../components/UsersList";
 
 function Myroutes() {
     return (
@@ -14,11 +15,12 @@ function Myroutes() {
           <Route path='signup' element={<SignUp/>}/>
           <Route path='login' element={<LogIn/>}/>
           <Route path="admin" element={<AdminDashboard/>}/>
-          <Route path="user/user" element={<UserDashboard/>}/>
-          <Route path="list" element={<List/>}/>
+          <Route path="user" element={<UserDashboard/>}/>
+          <Route path="userlist" element={<UserList/>}/>
+          <Route path="user/attendance" element={<AttendanceList/>}/>
         </Routes>
       </div>
   );
 };
-  
-  export default Myroutes;
+
+export default Myroutes;

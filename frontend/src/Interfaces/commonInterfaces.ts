@@ -16,3 +16,9 @@ export interface IUser{
     role: string,
     status: string
 }
+export interface IAttendance{
+    user_id: string,
+    date: Date,
+    entry: Date,
+    exit: Date,
+}
