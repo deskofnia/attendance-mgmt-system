@@ -2,21 +2,24 @@ import './css/List2.css';
 import { useEffect, useState } from 'react';
 import { IUser } from '../Interfaces/commonInterfaces';
 import axios from 'axios';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export const List = () => {
 
   const [users, setUsers] = useState<IUser[]>([]);
-    const navigate = useNavigate();
+  
+  const navigate = useNavigate();
+
   useEffect(() => {
-    axios.get<IUser[]>("http://localhost:5000/api/list")
+    axios.get<IUser[]>("http://localhost:5000/api/userslist")
     .then((res) =>{
         console.log(res);
         setUsers(res.data);
     });
   }, []);
+
   async function dashboard() {
-    navigate('/admin')
+    navigate('/admin');
   }
 
   return (
@@ -26,7 +29,7 @@ export const List = () => {
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Password</th>
+                    <th scope="col">Username</th>
                     <th scope="col">ID</th>
                     <th scope="col">Status</th>
                 </tr>
@@ -38,7 +41,7 @@ export const List = () => {
                         <tr key={i}>
                             <td>{i + 1}</td>
                             <td>{user.email}</td>
-                            <td>{user.password}</td>
+                            <td>{user.username}</td>
                             <td>{user._id}</td>
                             <td>{user.status}</td>
                         </tr>
@@ -49,7 +52,6 @@ export const List = () => {
         </table>
         <>
         <button onClick={dashboard} >Dashboard</button>
-        {/* <a href="/admin" >Dashboard</a>  */}
         </>
     </div>
   )

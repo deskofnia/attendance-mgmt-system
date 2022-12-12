@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import AdminDashboard from "../components/AdminDashboard";
 import { Home } from "../components/Home";
-import { List } from "../components/List";
+import { List } from "../components/UsersList";
 import LogIn from "../components/LogInForm";
 import SignUp from "../components/SignUpForm";
 import UserDashboard from "../components/UserDashboard";

@@ -9,6 +9,7 @@ export interface ISignUp extends ILogIn {
 }
 
 export interface IUser{
+    username: string,
     _id: string,
     email: string,
     password: string,

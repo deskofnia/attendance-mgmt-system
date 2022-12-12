@@ -18,4 +18,4 @@ const userSchema = new mongoose.Schema<IAttendance>({
     }
 });
 
-export const User = mongoose.model<IAttendance>("attendance", userSchema);
+export const Attendance = mongoose.model<IAttendance>("attendance", userSchema);
