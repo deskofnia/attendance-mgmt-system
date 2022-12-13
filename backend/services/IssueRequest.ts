@@ -1,5 +1,4 @@
-import { Request, RequestHandler, Response } from 'express';
-import dotenv from 'dotenv';
+import { Request, Response } from 'express';
 import { Req } from '../models/requestModel';
 
 export default async function issueReq(req: Request, res: Response){
