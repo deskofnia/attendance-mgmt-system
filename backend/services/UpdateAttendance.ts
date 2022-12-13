@@ -1,22 +1,23 @@
 import { Attendance } from "../models/attendanceModel";
 import { Request, Response } from 'express';
 
-export default async function editStatus(req: Request, res: Response){
+export default async function updateAttendance(req: Request, res: Response){
     const { exit } = req.body;
-    console.log(exit);
-    const id = req.query.id;
+    const id = req.body.id;
     // console.log('Status', status)
     // Save
     await Attendance.updateOne(
         { _id: id },
         {
           $set: { exit: exit },
-          $currentDate: { lastModified: true }
+        },
+        {
+            $currentDate: { lastUpdated: true }
         }
     )
     .then(() => {
         console.log("Attendace Updated");
-        res.send("Done")
+        res.send(res)
     }
     )
     .catch((err)=>{

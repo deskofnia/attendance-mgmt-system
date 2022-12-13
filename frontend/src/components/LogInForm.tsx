@@ -15,9 +15,6 @@ export default function LogIn() {
     resolver: yupResolver(Loginschema)
   });
 
-  // console.log(errors,"======errors=====");
-  
-
   const navigate = useNavigate();
 
 
@@ -25,8 +22,10 @@ export default function LogIn() {
     
     axios.post("http://localhost:5000/api/login", data)
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       localStorage.setItem("id", res.data.user._id);
+      const id = localStorage.getItem("id");
+      
       if(res.data.user.role ==="user")
       {
           if(res.data.user.status === "active") {
@@ -40,9 +39,9 @@ export default function LogIn() {
               progress: undefined,
               theme: "light",
             });
-              
+            
             setTimeout(() => {
-              navigate("/user");
+              navigate(`/user/${id}`);
             }, 2000);
           }
         else{
@@ -72,7 +71,7 @@ export default function LogIn() {
         });
           
         setTimeout(() => {
-          navigate("/admin");
+          navigate(`/admin/${id}`);
         }, 2000);
       }
     

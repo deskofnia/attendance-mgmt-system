@@ -21,7 +21,7 @@ export const ClockInAndOut = () => {
       addAttendance();
       setButtonText("Clock Out");
     }
-    else{
+    else if(buttonText==="Clock Out"){
       updateAttendance()
       setButtonText("Clock In"); 
     }
@@ -33,9 +33,10 @@ export const ClockInAndOut = () => {
 
   const getData = async ()=>{
     await axios({
-      method: "get",
+      method: "post",
       url: "http://localhost:5000/api/user/attendance",
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
+      data: { user_id: localStorage.getItem("id")},
     }).then((res) =>{
         setAttendance(res.data);
     });
@@ -56,15 +57,15 @@ export const ClockInAndOut = () => {
   }
   async function updateAttendance() {
     await axios({
-      method: "put",
-      url: `http://localhost:5000/api/user/updateattendance?${localStorage.getItem('attendanceid')}`,
+      method: "post",
+      url: 'http://localhost:5000/api/user/updateattendance',
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
-      data: { exit: hours },
+      data: { exit: hours, id:localStorage.getItem('attendanceid')},
     }).then((res)=> {
         localStorage.removeItem('attendanceid');
-        console.log(res);
         getData();
-    });
+    })
+    .catch((err)=> console.log(err))
 }
 
   return (
@@ -90,7 +91,6 @@ export const ClockInAndOut = () => {
                             <td>{data.entry}</td>
                             <td>{data.exit}</td>
                         </tr>
-
                     )
                 })
             }

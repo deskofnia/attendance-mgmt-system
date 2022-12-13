@@ -14,9 +14,9 @@ routes.post('/register', SignUp);
 routes.post('/login', LogIn);
 routes.get('/userslist', ListUsers);
 routes.get('/finduser/:id', FindOneUser);
-routes.get('/user/attendance', AttendanceList);
+routes.post('/user/attendance', AttendanceList);
 routes.post('/user/addattendance', AddAttendance);
-routes.put('/user/updateattendance', UpdateAttendance);
+routes.route('/user/updateattendance').post(UpdateAttendance);
 routes.route('/editstatus').put(EditStatus);
 
 export default routes;

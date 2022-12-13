@@ -1,15 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
 import { ClockInAndOut } from "./ClockInClockOut";
-import './css/AdminDashboard.css';
+// import './css/AdminDashboard.css';
 import Header from "./Header";
 
 export default function AdminDashboard() {
 
-  const navigate = useNavigate();
-  
-  const logout = () => {
-    navigate('/login');
-  }
   return (
     <div>
       <Header/>

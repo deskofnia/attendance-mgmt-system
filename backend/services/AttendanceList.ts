@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Attendance } from '../models/attendanceModel';
 
 export default async function attendancelist(req: Request, res: Response) {
-    await Attendance.find({})
+    await Attendance.find({user_id: req.body.user_id})
     .then((data) => {
 
         Attendance.aggregate([
