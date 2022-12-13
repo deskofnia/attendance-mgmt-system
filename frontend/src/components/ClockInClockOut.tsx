@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
 import { IAttendance } from '../Interfaces/commonInterfaces';
+// import './css/ClockInAndOut.css';
 
 
 export const ClockInAndOut = () => {
@@ -28,7 +29,7 @@ export const ClockInAndOut = () => {
   const getData = async ()=>{
     await axios({
       method: "get",
-      url: "http://localhost:5000/api//user/attendance",
+      url: "http://localhost:5000/api/user/attendance",
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
     }).then((res) =>{
         setAttendance(res.data);

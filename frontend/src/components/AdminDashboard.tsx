@@ -23,12 +23,6 @@ export default function AdminDashboard() {
                   Users
                 </a>
               </li>
-              <li className="sidebarListItem">
-                <i className="fas fa-user-clock"></i>
-                <Link className="sidebarLink" to="/leave">
-                  Leave Request
-                </Link>
-              </li>
             </ul>
           </div>
           <div className="sidebarMenu">

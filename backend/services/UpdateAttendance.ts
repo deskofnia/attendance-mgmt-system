@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 
 export default async function editStatus(req: Request, res: Response){
     const { exit } = req.body;
-    const id = req.query.id;
+    const id = req.params.id;
     // console.log('Status', status)
     // Save
     await Attendance.updateOne(

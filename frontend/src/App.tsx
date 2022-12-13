@@ -1,4 +1,3 @@
-import Nav from './components/Navbar';
 import Myroutes from './routes/routes';
 import './App.css';
 
