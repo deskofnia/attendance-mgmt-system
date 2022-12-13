@@ -1,48 +1,51 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
 import { IAttendance } from '../Interfaces/commonInterfaces';
-// import './css/ClockInAndOut.css';
 import './css/ClockInClockOut.css';
 
 
 export const ClockInAndOut = () => {
 
-  async function geoloc(){ navigator.geolocation.getCurrentPosition(position => {
-    const { latitude, longitude } = position.coords;
-    localStorage.setItem("lat", latitude.toString());
-    localStorage.setItem("long", longitude.toString());
-  })};
-  
   const now = new Date();
   // eslint-disable-next-line no-useless-concat
   const hours = 'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat") + '\nlong:'+localStorage.getItem("long");
   const date = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear();
 
+  navigator.geolocation.getCurrentPosition(position => {
+    const { latitude, longitude } = position.coords;
+    localStorage.setItem("lat", latitude.toString());
+    localStorage.setItem("long", longitude.toString());
+  });
+
   const [attendance, setAttendance] = useState<IAttendance[]>([]);
 
   const [buttonText, setButtonText] = useState("Clock In");
 
-  const toggle = async() => {
+  const toggle = async () => {
     if(buttonText==="Clock In")
     {
-      await geoloc();
-      addAttendance();
+      await addAttendance();
       setButtonText("Clock Out");
-      localStorage.removeItem("lat");
-      localStorage.removeItem("long");
+      // localStorage.removeItem("lat");
+      // localStorage.removeItem("long");
     }
     else if(buttonText==="Clock Out"){
-      await geoloc();
-      updateAttendance()
+      // navigator.geolocation.getCurrentPosition(position => {
+      //   const { latitude, longitude } = position.coords;
+      //   localStorage.setItem("lat", latitude.toString());
+      //   localStorage.setItem("long", longitude.toString());
+      // });
+      await updateAttendance()
       setButtonText("Clock In");
-      localStorage.removeItem("lat");
-      localStorage.removeItem("long");
+      
+      // localStorage.removeItem("lat");
+      // localStorage.removeItem("long");
     }
   }
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [buttonText]);
 
   const getData = async ()=>{
     await axios({
@@ -51,41 +54,39 @@ export const ClockInAndOut = () => {
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
       data: { user_id: localStorage.getItem("userid")},
     }).then((res) =>{
-        setAttendance(res.data);
+      setAttendance(res.data);
     });
   }
 
   async function addAttendance () {
-
     await axios({
       method: "post",
       url: 'http://localhost:5000/api/user/addattendance',
-    //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
       data: { date: date, entry: hours, user_id: localStorage.getItem("userid")},
     }).then((res)=> {
       // console.log(res);
       localStorage.setItem('attendanceid', res.data.user._id);
-      getData();
+      // getData();
     });
   }
   async function updateAttendance() {
     await axios({
       method: "post",
       url: 'http://localhost:5000/api/user/updateattendance',
-    //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
       data: { exit: hours, id:localStorage.getItem('attendanceid')},
     }).then((res)=> {
         localStorage.removeItem('attendanceid');
-        console.log(res.data);
-        getData();
+        // console.log(res.data);
+        // getData();
     })
-    .catch((err)=> console.log(err))
+    // .catch((err)=> console.log(err))
 }
 
   return (
     <div> 
-        <button onClick={() => toggle()}>{buttonText}</button>       
+        <button onClick={() => toggle()}>{buttonText}</button>
         <table  className="styled-table" >
+        
             <thead>
                 <tr>
                     <th scope="col">#</th>

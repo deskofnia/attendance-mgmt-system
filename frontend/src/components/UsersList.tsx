@@ -91,10 +91,8 @@ export const UserList = () => {
                 })
             }
             </tbody>
+            <button onClick={dashboard} >Dashboard</button>
         </table>
-        <>
-        <button onClick={dashboard} >Dashboard</button>
-        </>
     </div>
   )
 }
