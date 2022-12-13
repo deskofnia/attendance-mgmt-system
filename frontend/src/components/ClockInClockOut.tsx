@@ -7,6 +7,10 @@ import './css/UserList.css';
 
 export const ClockInAndOut = () => {
   
+  const now = new Date();
+  const hours = now.getHours() + ':' + now.getMinutes();
+  const date = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear();
+
   const [attendance, setAttendance] = useState<IAttendance[]>([]);
 
   const [buttonText, setButtonText] = useState("Clock In");
@@ -43,20 +47,21 @@ export const ClockInAndOut = () => {
       method: "post",
       url: 'http://localhost:5000/api/user/addattendance',
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
-      data: { date: new Date(), entry: new Date(), id: localStorage.getItem("_id")},
+      data: { date: date, entry: hours, user_id: localStorage.getItem("id")},
     }).then((res)=> {
-      console.log(res);
+      // console.log(res);
+      localStorage.setItem('attendanceid', res.data.user._id);
       getData();
     });
   }
   async function updateAttendance() {
-    let id = localStorage.getItem("_id");
     await axios({
       method: "put",
-      url: `http://localhost:5000/api/user/updateattendance?${id}`,
+      url: `http://localhost:5000/api/user/updateattendance?${localStorage.getItem('attendanceid')}`,
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
-      data: { exit: new Date() },
+      data: { exit: hours },
     }).then((res)=> {
+        localStorage.removeItem('attendanceid');
         console.log(res);
         getData();
     });

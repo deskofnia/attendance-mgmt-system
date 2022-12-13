@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { ClockInAndOut } from "./ClockInClockOut";
 import './css/AdminDashboard.css';
+import Header from "./Header";
 
 export default function AdminDashboard() {
 
@@ -11,6 +12,7 @@ export default function AdminDashboard() {
   }
   return (
     <div>
+      <Header/>
       <h1>User Panel</h1>
       <ClockInAndOut/>
       {/* <Link to="profile">Profile</Link>

@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 
 export default async function editStatus(req: Request, res: Response){
     const { exit } = req.body;
+    console.log(exit);
     const id = req.query.id;
     // console.log('Status', status)
     // Save
@@ -15,8 +16,7 @@ export default async function editStatus(req: Request, res: Response){
     )
     .then(() => {
         console.log("Attendace Updated");
-        res.send("Done"
-        )
+        res.send("Done")
     }
     )
     .catch((err)=>{

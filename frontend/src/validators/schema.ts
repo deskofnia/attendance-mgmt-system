@@ -9,7 +9,7 @@ export const SignUpschema  = Yup.object().shape({
 })
 
 export const Loginschema  = Yup.object().shape({
-  username: Yup.string().required('Username is required'),
+  // username: Yup.string().required('Username is required'),
   email: Yup.string().required('Email is required'),
   password: Yup.string().required('Password is required')
 })

@@ -15,12 +15,13 @@ export default function LogIn() {
     resolver: yupResolver(Loginschema)
   });
 
+  // console.log(errors,"======errors=====");
+  
+
   const navigate = useNavigate();
-  console.log("hello")
 
 
   const onSubmit = (data:ILogIn) => {
-    console.log("Inside submit")
     
     axios.post("http://localhost:5000/api/login", data)
     .then((res) => {
@@ -28,7 +29,7 @@ export default function LogIn() {
       localStorage.setItem("id", res.data.user._id);
       if(res.data.user.role ==="user")
       {
-          if(res.data.user.status === "Active") {
+          if(res.data.user.status === "active") {
             toast('Logged In Successfully 🎉. You will be redirected to user page in 3 seconds', {
               position: "top-center",
               autoClose: 2000,
