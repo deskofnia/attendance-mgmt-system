@@ -1,29 +1,43 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
+import { number } from 'yup/lib/locale';
 import { IAttendance } from '../Interfaces/commonInterfaces';
 // import './css/ClockInAndOut.css';
-import './css/UserList.css';
+import './css/ClockInClockOut.css';
 
 
 export const ClockInAndOut = () => {
+
+  function geoloc(){ navigator.geolocation.getCurrentPosition(position => {
+    const { latitude, longitude } = position.coords;
+    localStorage.setItem("lat", latitude.toString());
+    localStorage.setItem("long", longitude.toString());
+  })};
   
   const now = new Date();
-  const hours = now.getHours() + ':' + now.getMinutes();
+  // eslint-disable-next-line no-useless-concat
+  const hours = 'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat") + '\nlon:'+localStorage.getItem("long");
   const date = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear();
 
   const [attendance, setAttendance] = useState<IAttendance[]>([]);
 
   const [buttonText, setButtonText] = useState("Clock In");
 
-  const toggle = () => {
+  const toggle = async() => {
     if(buttonText==="Clock In")
     {
+      await geoloc();
       addAttendance();
       setButtonText("Clock Out");
+      localStorage.removeItem("lat");
+      localStorage.removeItem("long");
     }
     else if(buttonText==="Clock Out"){
+      await geoloc();
       updateAttendance()
-      setButtonText("Clock In"); 
+      setButtonText("Clock In");
+      localStorage.removeItem("lat");
+      localStorage.removeItem("long");
     }
   }
 
@@ -36,7 +50,7 @@ export const ClockInAndOut = () => {
       method: "post",
       url: "http://localhost:5000/api/user/attendance",
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
-      data: { user_id: localStorage.getItem("id")},
+      data: { user_id: localStorage.getItem("userid")},
     }).then((res) =>{
         setAttendance(res.data);
     });
@@ -48,7 +62,7 @@ export const ClockInAndOut = () => {
       method: "post",
       url: 'http://localhost:5000/api/user/addattendance',
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
-      data: { date: date, entry: hours, user_id: localStorage.getItem("id")},
+      data: { date: date, entry: hours, user_id: localStorage.getItem("userid")},
     }).then((res)=> {
       // console.log(res);
       localStorage.setItem('attendanceid', res.data.user._id);
@@ -71,7 +85,7 @@ export const ClockInAndOut = () => {
   return (
     <div> 
         <button onClick={() => toggle()}>{buttonText}</button>       
-        <table >
+        <table  className="styled-table" >
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -85,7 +99,7 @@ export const ClockInAndOut = () => {
             {
                 attendance.map((data, index) => {
                     return (
-                        <tr key={index}>
+                        <tr className="active-row" key={index}>
                             <td>{index + 1}</td>
                             <td>{data.date}</td>
                             <td>{data.entry}</td>

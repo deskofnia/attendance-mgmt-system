@@ -22,12 +22,17 @@ export const UserList = () => {
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
     }).then((res) =>{
         setUsers(res.data);
-        console.log("Response UserList: ", res)
+        // console.log("Response UserList: ", res)
       });
     }
 
   async function dashboard() {
-    navigate('/admin');
+    navigate(`/admin/${localStorage.getItem('adminId')}`);
+  }
+
+  const redirect = async (userid: string) => {
+    localStorage.setItem('userid', userid);
+    navigate(`/user/attendance/${userid}`);
   }
 
   async function acceptReq (id:string) {
@@ -36,7 +41,7 @@ export const UserList = () => {
       method: "put",
       url: `http://localhost:5000/api/editstatus?id=${id}`,
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
-      data: { status: 'Active'},
+      data: { status: 'active'},
     }).then((res)=> {
       getData();
     });
@@ -46,16 +51,17 @@ export const UserList = () => {
       method: "put",
       url: `http://localhost:5000/api/editstatus?id=${id}`,
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
-      data: { status: 'Inactive'},
+      data: { status: 'inactive'},
     }).then((res)=> {
         getData();
     });
 }
 
   return (
-    <div className=''>
-        <table >
-            <thead className=''>
+    <div >
+        <h1>User List</h1>
+        <table className='styled-table'>
+            <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Username</th>
@@ -63,23 +69,23 @@ export const UserList = () => {
                     <th scope="col">ID</th>
                     <th scope="col">Status</th>
                     <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
-            <tbody className=''>
+            <tbody >
             {
                 users.map((user, index) => {
                     return (
-                        <tr key={index}>
+                        <tr className='active-row' key={index}>
                             <td>{index + 1}</td>
                             <td>{user.username}</td>
                             <td>{user.email}</td>
                             <td>{user._id}</td>
                             <td>{user.status}</td>
-                            <td>
-                                <button onClick={(e: React.SyntheticEvent<EventTarget>) => acceptReq(users[index]?._id)} > Active </button>
-                                <button onClick={(e: React.SyntheticEvent<EventTarget>) => rejectReq(users[index]?._id)} > Inactive </button>
-                            </td>
-                            
+                            <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => acceptReq(users[index]?._id)} > Active </button></td>
+                            <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => rejectReq(users[index]?._id)} > Inactive </button></td>
+                            <td><button onClick={()=>redirect(user._id)}>Show Attendance</button></td>
                         </tr>
                     )
                 })

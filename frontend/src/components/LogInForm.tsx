@@ -22,13 +22,14 @@ export default function LogIn() {
     
     axios.post("http://localhost:5000/api/login", data)
     .then((res) => {
-      // console.log(res);
-      localStorage.setItem("id", res.data.user._id);
-      const id = localStorage.getItem("id");
+      // console.log(res)
       
       if(res.data.user.role ==="user")
       {
-          if(res.data.user.status === "active") {
+        localStorage.setItem("userid", res.data.user._id);
+        const id = localStorage.getItem("userid");  
+        
+        if(res.data.user.status === "active") {
             toast('Logged In Successfully 🎉. You will be redirected to user page in 3 seconds', {
               position: "top-center",
               autoClose: 2000,
@@ -44,7 +45,7 @@ export default function LogIn() {
               navigate(`/user/${id}`);
             }, 2000);
           }
-        else{
+        else if(res.data.user.status === "inactive"){
           toast('Sorry Can not login !! User is Inactived by the Admin', {
             position: "top-center",
             autoClose: 2000,
@@ -59,6 +60,9 @@ export default function LogIn() {
       }
       else
       {
+        localStorage.setItem("adminId", res.data.user._id);
+        const id = localStorage.getItem("adminId");
+
         toast('Logged In Successfully 🎉. You will be redirected to admin page in 3 seconds', {
           position: "top-center",
           autoClose: 2000,
