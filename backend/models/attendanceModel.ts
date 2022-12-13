@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import { IAttendance } from "../Interfaces/schemaInterfaces";
 
-const userSchema = new mongoose.Schema<IAttendance>({
+const attendanceSchema = new mongoose.Schema<IAttendance>({
     
     user_id: {
       type: Schema.Types.ObjectId,
@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema<IAttendance>({
     },
     date:{
         type:String,
-        // default:Date.now,
     },
     entry:{
       type:String,
@@ -20,4 +19,4 @@ const userSchema = new mongoose.Schema<IAttendance>({
     }
 });
 
-export const Attendance = mongoose.model<IAttendance>("attendances", userSchema);
+export const Attendance = mongoose.model<IAttendance>("attendances", attendanceSchema);

@@ -6,9 +6,9 @@ export default function UserDashboard() {
 
   return (
     <div>
-      <Header/>
+      <Header />
       <h1>User Panel</h1>
-      <ClockInAndOut/>
+      <ClockInAndOut />
     </div>
   );
 }

@@ -112,7 +112,7 @@ export default function LogIn() {
 
   return (
     <div>
-      <Nav/>
+      <Nav />
       <form className="login" onSubmit={handleSubmit(onSubmit)}>
 
         <label>Email</label>

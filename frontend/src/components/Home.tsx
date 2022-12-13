@@ -3,7 +3,7 @@ import Nav from './Navbar'
 export const Home = () => {
   return (
     <div>
-        <Nav/>
+        <Nav />
         <h1>Home</h1>
     </div>
   )

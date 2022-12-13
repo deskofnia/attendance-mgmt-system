@@ -5,7 +5,7 @@ import Header from "./Header";
 export default function AdminDashboard() {
   return (
     <div>
-      <Header/>
+      <Header />
       <div className="sidebar">
         <div className="sidebarWrapper">
           <div className="sidebarMenu">

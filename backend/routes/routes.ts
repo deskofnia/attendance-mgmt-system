@@ -7,6 +7,7 @@ import { AttendanceList } from '../controllers/ListAttendanceController';
 import { AddAttendance } from '../controllers/AddAttendanceController';
 import { EditStatus } from '../controllers/EditStatusController';
 import UpdateAttendance from '../services/UpdateAttendance';
+import { ReqList } from '../controllers/RequestListController';
 
 const routes = Router();
 
@@ -14,6 +15,7 @@ routes.post('/register', SignUp);
 routes.post('/login', LogIn);
 routes.get('/userslist', ListUsers);
 routes.get('/finduser/:id', FindOneUser);
+routes.get('/user/requestlist', ReqList);
 routes.post('/user/attendance', AttendanceList);
 routes.post('/user/addattendance', AddAttendance);
 routes.route('/user/updateattendance').post(UpdateAttendance);

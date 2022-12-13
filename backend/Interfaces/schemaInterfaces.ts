@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-export interface IUser{
+export interface IUser {
     username: string,
     email: string,
     password: string,
@@ -8,9 +8,16 @@ export interface IUser{
     status: string
 }
 
-export interface IAttendance{
+export interface IAttendance {
     user_id: Schema.Types.ObjectId,
     date: string,
     entry: string,
     exit: string,
+}
+
+export interface IRequest {
+    user_id: Schema.Types.ObjectId,
+    attendance_id: Schema.Types.ObjectId,
+    status: string,
+    reason: string,
 }
