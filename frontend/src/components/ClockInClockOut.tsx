@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
-import { number } from 'yup/lib/locale';
 import { IAttendance } from '../Interfaces/commonInterfaces';
 // import './css/ClockInAndOut.css';
 import './css/ClockInClockOut.css';
@@ -8,7 +7,7 @@ import './css/ClockInClockOut.css';
 
 export const ClockInAndOut = () => {
 
-  function geoloc(){ navigator.geolocation.getCurrentPosition(position => {
+  async function geoloc(){ navigator.geolocation.getCurrentPosition(position => {
     const { latitude, longitude } = position.coords;
     localStorage.setItem("lat", latitude.toString());
     localStorage.setItem("long", longitude.toString());
@@ -16,7 +15,7 @@ export const ClockInAndOut = () => {
   
   const now = new Date();
   // eslint-disable-next-line no-useless-concat
-  const hours = 'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat") + '\nlon:'+localStorage.getItem("long");
+  const hours = 'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat") + '\nlong:'+localStorage.getItem("long");
   const date = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear();
 
   const [attendance, setAttendance] = useState<IAttendance[]>([]);
@@ -77,6 +76,7 @@ export const ClockInAndOut = () => {
       data: { exit: hours, id:localStorage.getItem('attendanceid')},
     }).then((res)=> {
         localStorage.removeItem('attendanceid');
+        console.log(res.data);
         getData();
     })
     .catch((err)=> console.log(err))
