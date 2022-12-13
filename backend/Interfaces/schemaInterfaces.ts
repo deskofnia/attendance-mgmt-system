@@ -10,7 +10,7 @@ export interface IUser{
 
 export interface IAttendance{
     user_id: Schema.Types.ObjectId,
-    date: Date | string,
-    entry: Date | string,
-    exit: Date | string,
+    date: string,
+    entry: string,
+    exit: string,
 }

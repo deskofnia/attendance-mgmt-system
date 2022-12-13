@@ -24,8 +24,11 @@ export default async function attendancelist(req: Request, res: Response) {
 
         if (!data)
             res.status(404).send({ message: "Not Found !!" });
-        else 
-            res.json(data);
+        else {
+            console.log(data);
+            res.send(data);
+        }
+            
     })
     .catch(err => {
         res.status(500).send({ message: err.message || "error occured" });

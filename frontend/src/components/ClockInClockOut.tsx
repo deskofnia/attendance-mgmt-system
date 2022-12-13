@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react'
 import { IAttendance } from '../Interfaces/commonInterfaces';
 // import './css/ClockInAndOut.css';
+import './css/UserList.css';
 
 
 export const ClockInAndOut = () => {
@@ -10,14 +11,14 @@ export const ClockInAndOut = () => {
 
   const [buttonText, setButtonText] = useState("Clock In");
 
-  const toggle = (id:string) => {
+  const toggle = () => {
     if(buttonText==="Clock In")
     {
       addAttendance();
       setButtonText("Clock Out");
     }
     else{
-      updateAttendance(id)
+      updateAttendance()
       setButtonText("Clock In"); 
     }
   }
@@ -42,13 +43,14 @@ export const ClockInAndOut = () => {
       method: "post",
       url: 'http://localhost:5000/api/user/addattendance',
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
-      data: { date: new Date(), entry: new Date()},
+      data: { date: new Date(), entry: new Date(), id: localStorage.getItem("_id")},
     }).then((res)=> {
       console.log(res);
       getData();
     });
   }
-  async function updateAttendance(id:string) {
+  async function updateAttendance() {
+    let id = localStorage.getItem("_id");
     await axios({
       method: "put",
       url: `http://localhost:5000/api/user/updateattendance?${id}`,
@@ -61,7 +63,8 @@ export const ClockInAndOut = () => {
 }
 
   return (
-    <div>        
+    <div> 
+        <button onClick={() => toggle()}>{buttonText}</button>       
         <table >
             <thead>
                 <tr>
@@ -70,7 +73,6 @@ export const ClockInAndOut = () => {
                     <th scope="col">Entry Time</th>
                     <th scope="col">Exit Time</th>
                     {/* <th scope="col">ID</th> */}
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -79,12 +81,11 @@ export const ClockInAndOut = () => {
                     return (
                         <tr key={index}>
                             <td>{index + 1}</td>
-                            <td>{data.date.toString()}</td>
-                            <td>{data.entry.toString()}</td>
-                            <td>{data.exit.toString()}</td>
-                            {/* <td>{data._id}</td> */}
-                            <td><button onClick={() => toggle(attendance[index]?._id)}>{buttonText}</button></td>
+                            <td>{data.date}</td>
+                            <td>{data.entry}</td>
+                            <td>{data.exit}</td>
                         </tr>
+
                     )
                 })
             }

@@ -20,7 +20,7 @@ export interface IUser{
 export interface IAttendance{
     _id: string,
     user_id: string,
-    date: Date | string,
-    entry: Date | string,
-    exit: Date | string,
+    date: string,
+    entry: string,
+    exit: string,
 }

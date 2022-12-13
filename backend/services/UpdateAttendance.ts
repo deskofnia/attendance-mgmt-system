@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 
 export default async function editStatus(req: Request, res: Response){
     const { exit } = req.body;
-    const id = req.params.id;
+    const id = req.query.id;
     // console.log('Status', status)
     // Save
     await Attendance.updateOne(
@@ -15,6 +15,8 @@ export default async function editStatus(req: Request, res: Response){
     )
     .then(() => {
         console.log("Attendace Updated");
+        res.send("Done"
+        )
     }
     )
     .catch((err)=>{

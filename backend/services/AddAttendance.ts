@@ -5,6 +5,7 @@ import { Attendance } from '../models/attendanceModel';
 export default async function addAttendance(req: Request, res: Response){
 
     const { user_id, date, entry} = req.body;
+    console.log(user_id, date, entry);
     const attendance = await Attendance.create({ user_id, date, entry });
 
     // Save

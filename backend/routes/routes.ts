@@ -19,6 +19,4 @@ routes.post('/user/addattendance', AddAttendance);
 routes.put('/user/updateattendance', UpdateAttendance);
 routes.route('/editstatus').put(EditStatus);
 
-
-
 export default routes;

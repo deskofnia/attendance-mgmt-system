@@ -16,12 +16,16 @@ export default function LogIn() {
   });
 
   const navigate = useNavigate();
+  console.log("hello")
+
 
   const onSubmit = (data:ILogIn) => {
+    console.log("Inside submit")
+    
     axios.post("http://localhost:5000/api/login", data)
     .then((res) => {
       console.log(res);
-
+      localStorage.setItem("id", res.data.user._id);
       if(res.data.user.role ==="user")
       {
           if(res.data.user.status === "Active") {
