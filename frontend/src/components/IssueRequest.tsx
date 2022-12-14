@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
 import { IRequest } from '../Interfaces/commonInterfaces';
-import './css/ClockInClockOut.css';
+import './css/IssueRequest.css';
 
 
 export const IssueRequest = () => {
@@ -15,7 +15,7 @@ export const IssueRequest = () => {
   const getData = async ()=>{
     await axios({
       method: "get",
-      url: "http://localhost:5000/api/user/requestlist",
+      url: "http://localhost:5000/api/user/requestlistbyid",
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
       data: { user_id: localStorage.getItem("userid"), },
     }).then((res) =>{

@@ -10,6 +10,7 @@ import { UpdateAttendance } from '../controllers/UpdateAttendaceController';
 import { ReqList } from '../controllers/RequestListController';
 import { IssueReq } from '../controllers/IssueReqController';
 import { ChangeRequest } from '../controllers/ChangeReqController';
+import {ReqListById} from '../controllers/ReqListByUserId';
 
 const routes = Router();
 
@@ -17,10 +18,11 @@ routes.post('/register', SignUp);
 routes.post('/login', LogIn);
 routes.get('/userslist', ListUsers);
 routes.get('/user/finduser', FindOneUser);
-routes.get('/user/requestlist', ReqList);
+routes.get('/admin/requestlist', ReqList);
 routes.post('/user/changerequest', ChangeRequest)
 routes.post('/user/issuerequest', IssueReq);
 routes.post('/user/attendance', AttendanceList);
+routes.post('user/requestlistbyid', ReqListById);
 routes.post('/user/addattendance', AddAttendance);
 routes.route('/user/updateattendance').post(UpdateAttendance);
 routes.route('/editstatus').put(EditStatus);

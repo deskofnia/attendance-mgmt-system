@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { IAttendance } from '../Interfaces/commonInterfaces';
 import './css/ClockInClockOut.css';
 
@@ -7,6 +8,7 @@ import './css/ClockInClockOut.css';
 export const ClockInAndOut = () => {
 
   const now = new Date();
+  const navigate = useNavigate();
   // eslint-disable-next-line no-useless-concat
   const hours = 'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat") + '\nlong:'+localStorage.getItem("long");
   const date = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear();
@@ -95,6 +97,7 @@ export const ClockInAndOut = () => {
   return (
     <div> 
         <button onClick={() => toggle()}>{buttonText}</button>
+        <button onClick={() => { navigate('/user/issuerequest')}}>Request</button>
         <table  className="styled-table" >
             <thead>
                 <tr>
@@ -115,6 +118,7 @@ export const ClockInAndOut = () => {
                             <td>{data.entry}</td>
                             <td>{data.exit}</td>
                             <td>{effectiveHrs}</td>
+                            
                         </tr>
                     )
                 })
