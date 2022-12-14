@@ -3,12 +3,12 @@ import { Req } from '../models/requestModel';
 
 
 export default async function changeReq(req: Request, res: Response){
-    const { stat  } = req.body;
+    const { status  } = req.body;
     const id = req.query.id;
     await Req.updateOne(
         { _id: id },
         {
-            $set: { status: stat },
+            $set: { status: status },
         },
         {
             $currentDate: { lastUpdated: true }

@@ -6,7 +6,7 @@ import './css/ClockInClockOut.css';
 
 export const IssueRequest = () => {
 
-  const [request, setRequest] = useState<IRequest[]>([]);
+  const [ request, setRequest] = useState<IRequest[]>([]);
 
   useEffect(() => {
     getData();
@@ -14,59 +14,50 @@ export const IssueRequest = () => {
 
   const getData = async ()=>{
     await axios({
-      method: "post",
+      method: "get",
       url: "http://localhost:5000/api/user/requestlist",
     //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
       data: { user_id: localStorage.getItem("userid"), },
     }).then((res) =>{
+      console.log(res);
       setRequest(res.data);
     });
   }
 
-  async function addAttendance () {
+  async function issueRequest () {
     await axios({
       method: "post",
-      url: 'http://localhost:5000/api/user/addattendance',
-      data: { date: date, entry: hours, user_id: localStorage.getItem("userid")},
+      url: 'http://localhost:5000/api/user/issuerequest',
+      data: {  user_id: localStorage.getItem("userid"), reason:'ggggg'},
     }).then((res)=> {
-      localStorage.setItem('attendanceid', res.data.user._id);
+      console.log(res);
+      localStorage.setItem('reqid', res.data.user._id);
     })
     .catch((err)=> console.log(err))
   }
-  async function updateAttendance() {
-    await axios({
-      method: "post",
-      url: 'http://localhost:5000/api/user/updateattendance',
-      data: { exit: hours, id:localStorage.getItem('attendanceid')},
-    }).then((res)=> {
-        localStorage.removeItem('attendanceid');
-    })
-    .catch((err)=> console.log(err))
-}
 
   return (
     <div> 
-        <button onClick={() => toggle()}>{buttonText}</button>
         <table  className="styled-table" >
-        
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Entry Time</th>
-                    <th scope="col">Exit Time</th>
+                    <th scope="col">UserID</th>
+                    <th scope="col">Request Id</th>
+                    <th scope="col">Status</th>
                     {/* <th scope="col">ID</th> */}
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
             {
-                attendance.map((data, index) => {
+                request.map((data, index) => {
                     return (
                         <tr className="active-row" key={index}>
                             <td>{index + 1}</td>
-                            <td>{data.date}</td>
-                            <td>{data.entry}</td>
-                            <td>{data.exit}</td>
+                            <td>{data.user_id}</td>
+                            <td>{data._id}</td>
+                            <td>{data.status}</td>
                         </tr>
                     )
                 })

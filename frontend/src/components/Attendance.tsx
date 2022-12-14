@@ -50,7 +50,7 @@ export const Attendance = () => {
                     })
                 }
                 </tbody>
-                <button onClick={()=> navigate('/userslist')}>Back</button>
+                <button onClick={()=> navigate('/admin/userslist')}>Back</button>
             </table>
         </div>
     )

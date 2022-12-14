@@ -16,9 +16,9 @@ const routes = Router();
 routes.post('/register', SignUp);
 routes.post('/login', LogIn);
 routes.get('/userslist', ListUsers);
-routes.get('/finduser/:id', FindOneUser);
-routes.post('/user/requestlist', ReqList);
-routes.put('/user/changerequest', ChangeRequest)
+routes.get('/user/finduser', FindOneUser);
+routes.get('/user/requestlist', ReqList);
+routes.post('/user/changerequest', ChangeRequest)
 routes.post('/user/issuerequest', IssueReq);
 routes.post('/user/attendance', AttendanceList);
 routes.post('/user/addattendance', AddAttendance);

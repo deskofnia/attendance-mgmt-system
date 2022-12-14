@@ -6,7 +6,9 @@ import { Home } from "../components/Home";
 import LogIn from "../components/LogInForm";
 import SignUp from "../components/SignUpForm";
 import UserDashboard from "../components/UserDashboard";
+import { Request } from "../components/Requests";
 import { UserList } from "../components/UsersList";
+import { IssueRequest } from "../components/IssueRequest";
 
 function Myroutes() {
     return (
@@ -17,9 +19,11 @@ function Myroutes() {
           <Route path='/login' element={<LogIn/>}/>
           <Route path="/admin/:id" element={<AdminDashboard/>}/>
           <Route path="/user/:id" element={<UserDashboard/>}/>
-          <Route path="/userslist" element={<UserList/>}/>
+          <Route path="/admin/userslist" element={<UserList/>}/>
           <Route path="/user/attendance" element={<ClockInAndOut/>}/>
           <Route path="/user/attendance/:id" element={<Attendance/>}/>
+          <Route path="/user/issuerequest" element={<IssueRequest/>}/>
+          <Route path="/admin/requests" element={<Request/>}/>
         </Routes>
       </div>
   );

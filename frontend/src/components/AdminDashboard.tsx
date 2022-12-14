@@ -19,9 +19,15 @@ export default function AdminDashboard() {
               </li>
               <li className="sidebarListItem">
                 <i className="fas fa-user"></i>
-                <a className="sidebarLink" href="/userslist">
+                <Link className="sidebarLink" to="/admin/userslist">
                   Users
-                </a>
+                </Link>
+              </li>
+              <li className="sidebarListItem">
+                <i className="fas fa-user"></i>
+                <Link className="sidebarLink" to="/admin/requests">
+                  Requests
+                </Link>
               </li>
             </ul>
           </div>
