@@ -4,7 +4,6 @@ import { Request, Response } from 'express';
 export default async function updateAttendance(req: Request, res: Response){
     const { exit } = req.body;
     const id = req.body.id;
-    // console.log('Status', status)
     // Save
     await Attendance.updateOne(
         { _id: id },

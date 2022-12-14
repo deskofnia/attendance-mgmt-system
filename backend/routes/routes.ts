@@ -17,7 +17,7 @@ routes.post('/register', SignUp);
 routes.post('/login', LogIn);
 routes.get('/userslist', ListUsers);
 routes.get('/finduser/:id', FindOneUser);
-routes.get('/user/requestlist', ReqList);
+routes.post('/user/requestlist', ReqList);
 routes.put('/user/changerequest', ChangeRequest)
 routes.post('/user/issuerequest', IssueReq);
 routes.post('/user/attendance', AttendanceList);

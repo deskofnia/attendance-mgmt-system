@@ -24,3 +24,10 @@ export interface IAttendance{
     entry: string,
     exit: string,
 }
+
+export interface IRequest {
+    _id: string,
+    user_id: string,
+    status: string,
+    reason: string,
+}

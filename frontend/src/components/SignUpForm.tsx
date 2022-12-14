@@ -33,7 +33,6 @@ export default function SignUp() {
         theme: "light",
       });
 
-      // navigate('/login');
       setTimeout(() => {
         navigate("/login");
       }, 4000);

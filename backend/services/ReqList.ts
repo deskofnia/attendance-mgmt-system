@@ -3,7 +3,7 @@ import { Req } from '../models/requestModel';
 
 export  default async function reqlist(req: Request, res: Response){    
 
-    await Req.find()//{user_id: req.body.user_id}
+    await Req.find({user_id: req.body.userid})//
     .then((data) => {
 
         Req.aggregate([
