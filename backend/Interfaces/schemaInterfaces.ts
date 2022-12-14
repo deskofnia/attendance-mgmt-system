@@ -17,7 +17,6 @@ export interface IAttendance {
 
 export interface IRequest {
     user_id: Schema.Types.ObjectId,
-    attendance_id: Schema.Types.ObjectId,
     status: string,
     reason: string,
 }

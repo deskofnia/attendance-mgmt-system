@@ -3,7 +3,7 @@ import { Req } from '../models/requestModel';
 
 export  default async function reqlist(req: Request, res: Response){    
 
-    await Req.find({})
+    await Req.find()//{user_id: req.body.user_id}
     .then((data) => {
 
         Req.aggregate([
@@ -22,24 +22,8 @@ export  default async function reqlist(req: Request, res: Response){
                 }
             },
             {
-                $lookup: {
-                     from: "attendances",
-                     localField: "attendance_id",
-                     foreignField: "_id",
-                     as: "attendance"
-                }
-            },
-            {
-                $unwind: {
-                    path: '$attendance', 
-                    preserveNullAndEmptyArrays: true
-                }
-            },
-            {
                 $project: {
-                    book_name: "$attendance.title",
                     user_name: "$user.username",
-                    status: "pending",
                 }
             }
         ]);

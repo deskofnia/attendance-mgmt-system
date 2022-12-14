@@ -64,10 +64,9 @@ export const ClockInAndOut = () => {
       url: 'http://localhost:5000/api/user/addattendance',
       data: { date: date, entry: hours, user_id: localStorage.getItem("userid")},
     }).then((res)=> {
-      // console.log(res);
       localStorage.setItem('attendanceid', res.data.user._id);
-      // getData();
-    });
+    })
+    .catch((err)=> console.log(err))
   }
   async function updateAttendance() {
     await axios({
@@ -76,10 +75,8 @@ export const ClockInAndOut = () => {
       data: { exit: hours, id:localStorage.getItem('attendanceid')},
     }).then((res)=> {
         localStorage.removeItem('attendanceid');
-        // console.log(res.data);
-        // getData();
     })
-    // .catch((err)=> console.log(err))
+    .catch((err)=> console.log(err))
 }
 
   return (

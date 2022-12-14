@@ -6,8 +6,6 @@ import { User } from '../models/userModel';
 export default async function signup(req: Request, res: Response){
     const { email } = req.body;
     const { username } = req.body;
-    // const role = 'user';
-    // const status = 'active';
 
     const password = await bcrypt.hash(req.body.password, 10);
 

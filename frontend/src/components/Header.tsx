@@ -6,7 +6,7 @@ export default function Header() {
     const logout = () => {
         localStorage.clear();
         navigate('/login');
-      }
+    }
 
     return (
         <header>

@@ -15,17 +15,6 @@ export const UserList = () => {
     getData();
   }, []);
 
-  const getData = async ()=>{
-    await axios({
-      method: "get",
-      url: "http://localhost:5000/api/userslist",
-    //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
-    }).then((res) =>{
-        setUsers(res.data);
-        // console.log("Response UserList: ", res)
-      });
-    }
-
   async function dashboard() {
     navigate(`/admin/${localStorage.getItem('adminId')}`);
   }
@@ -35,12 +24,22 @@ export const UserList = () => {
     navigate(`/user/attendance/${userid}`);
   }
 
+  const getData = async ()=>{
+    await axios({
+      method: "get",
+      url: "http://localhost:5000/api/userslist",
+    }).then((res) =>{
+        setUsers(res.data);
+      });
+    }
+
+  
+
   async function acceptReq (id:string) {
 
     await axios({
       method: "put",
       url: `http://localhost:5000/api/editstatus?id=${id}`,
-    //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
       data: { status: 'active'},
     }).then((res)=> {
       getData();
@@ -50,7 +49,6 @@ export const UserList = () => {
     await axios({
       method: "put",
       url: `http://localhost:5000/api/editstatus?id=${id}`,
-    //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
       data: { status: 'inactive'},
     }).then((res)=> {
         getData();

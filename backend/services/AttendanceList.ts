@@ -3,9 +3,9 @@ import { Attendance } from '../models/attendanceModel';
 
 export default async function attendancelist(req: Request, res: Response) {
     await Attendance.find({user_id: req.body.user_id})
-    .then((data) => {
+    .then(async (data) => {
 
-        Attendance.aggregate([
+        await Attendance.aggregate([
             {
                 $lookup:{
                     from:"users",
