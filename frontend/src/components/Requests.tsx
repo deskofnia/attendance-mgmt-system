@@ -34,7 +34,7 @@ export const Request = () => {
     const getData = async ()=>{
         await axios({
           method: "get",
-          url: "http://localhost:5000/api/user/requestlist",
+          url: "http://localhost:5000/api/admin/requestlist",
           // data: { userid: localStorage.getItem("userid"), },
         }).then((res) =>{
           console.log(res);

@@ -22,7 +22,7 @@ export default function LogIn() {
     
     axios.post("http://localhost:5000/api/login", data)
     .then((res) => {
-      // console.log(res)
+      console.log(res)
       
       if(res.data.user.role ==="user")
       {

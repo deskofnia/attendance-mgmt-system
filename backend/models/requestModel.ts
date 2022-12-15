@@ -8,12 +8,14 @@ const reqSchema = new mongoose.Schema<IRequest>({
       required: true,
       ref: "users"
     },
+    attendance_id: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "attendances"
+    },
     status:{
         type:String,
     },
-    reason:{
-      type:String,
-    }
 });
 
 export const Req = mongoose.model<IRequest>("requests", reqSchema);

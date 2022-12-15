@@ -13,7 +13,7 @@ export default function AdminDashboard() {
             <ul className="sidebarList">
               <li className="sidebarListItem">
                 <i className="fas fa-home"></i>
-                <Link className="sidebarLink" to="/admin">
+                <Link className="sidebarLink" to={`/admin/${localStorage.getItem("adminId")}`}>
                   Home
                 </Link>
               </li>
