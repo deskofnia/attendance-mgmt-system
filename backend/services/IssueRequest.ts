@@ -4,13 +4,13 @@ import { Req } from '../models/requestModel';
 export default async function issueReq(req: Request, res: Response){
     const { user_id, attendance_id } = req.body;
     // Create New Book Issue Request
-    const issueRequest = new Req({ user_id, attendance_id, status:'pending' });
+    const issueRequest = new Req({ user_id, attendance_id, status:'', remarks:'' });
     
     await issueRequest.save((err) => {
       if(err)
       {
           return res.status(400).json({msg: (err)});
       }
-      return res.status(200).json("Request has been issued successfully");
+      return res.status(200).json(res);
     })
 }

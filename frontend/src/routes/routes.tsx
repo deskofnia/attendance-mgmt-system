@@ -9,6 +9,7 @@ import UserDashboard from "../components/UserDashboard";
 import { Request } from "../components/Requests";
 import { UserList } from "../components/UsersList";
 import { IssueRequest } from "../components/IssueRequest";
+import { MonthlyAttendance } from "../components/MonthAttendance";
 
 function Myroutes() {
     return (
@@ -22,7 +23,8 @@ function Myroutes() {
           <Route path="/admin/userslist" element={<UserList/>}/>
           <Route path="/user/attendance" element={<ClockInAndOut/>}/>
           <Route path="/user/attendance/:id" element={<Attendance/>}/>
-          <Route path="/user/issuerequest" element={<IssueRequest/>}/>
+          <Route path="/user/monthlyattendance/:id" element={<MonthlyAttendance/>}/>
+          <Route path="/user/:id/issuerequest" element={<IssueRequest/>}/>
           <Route path="/admin/requests" element={<Request/>}/>
         </Routes>
       </div>

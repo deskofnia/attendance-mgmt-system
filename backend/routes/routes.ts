@@ -12,6 +12,7 @@ import { IssueReq } from '../controllers/IssueReqController';
 import { ChangeRequest } from '../controllers/ChangeReqController';
 import {ReqListById} from '../controllers/ReqListByUserId';
 import { DayAttendance } from '../controllers/DayAttendanceController';
+import { MonthAttendance } from '../controllers/MonthAttendanceController';
 
 const routes = Router();
 
@@ -22,7 +23,8 @@ routes.get('/user/finduser', FindOneUser);
 routes.get('/admin/requestlist', ReqList);
 routes.post('/user/changerequest', ChangeRequest)
 routes.post('/user/issuerequest', IssueReq);
-routes.post('/user/monthlyattendance', AttendanceList);
+routes.post('/user/attendance', AttendanceList);
+routes.post('/user/monthlyattendance', MonthAttendance);
 routes.post('/user/dayattendance', DayAttendance);
 routes.post('user/requestlistbyid', ReqListById);
 routes.post('/user/addattendance', AddAttendance);

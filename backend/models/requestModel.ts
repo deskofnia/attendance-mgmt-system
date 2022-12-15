@@ -16,6 +16,9 @@ const reqSchema = new mongoose.Schema<IRequest>({
     status:{
         type:String,
     },
+    remarks:{
+        type:String,
+    }
 });
 
 export const Req = mongoose.model<IRequest>("requests", reqSchema);

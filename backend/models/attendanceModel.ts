@@ -16,6 +16,24 @@ const attendanceSchema = new mongoose.Schema<IAttendance>({
     },
     exit:{
       type:String,
+    },
+    clockInHours:{
+      type:Number,
+    },
+    clockOutHours:{
+      type:Number,
+    },
+    totalHours:{
+      type:Number,
+    },
+    status:{
+      type: String,
+    },
+    fromdate:{
+      type:String,
+    },
+    todate:{
+      type:String,
     }
 });
 

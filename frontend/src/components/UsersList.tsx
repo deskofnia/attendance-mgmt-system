@@ -21,7 +21,7 @@ export const UserList = () => {
 
   const redirect = async (userid: string) => {
     localStorage.setItem('userid', userid);
-    navigate(`/user/attendance/${userid}`);
+    navigate(`/user/monthlyattendance/${userid}`);
   }
 
   const getData = async ()=>{

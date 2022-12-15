@@ -23,11 +23,15 @@ export interface IAttendance{
     date: string,
     entry: string,
     exit: string,
+    clockInHours: number,
+    clockOutHours: number,
+    totalHours: number,
+    status: string
 }
 
 export interface IRequest {
     _id: string,
     user_id: string,
     status: string,
-    reason: string,
+    remarks: string,
 }

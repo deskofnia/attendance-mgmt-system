@@ -32,9 +32,8 @@ export const IssueRequest = () => {
                     <th scope="col">#</th>
                     <th scope="col">UserID</th>
                     <th scope="col">Request Id</th>
-                    <th scope="col">Attendance Id</th>
                     <th scope="col">Status</th>
-                    {/* <th scope="col">ID</th> */}
+                    <th scope="col">Remarks</th>
                     <th></th>
                 </tr>
             </thead>
@@ -46,8 +45,8 @@ export const IssueRequest = () => {
                             <td>{index + 1}</td>
                             <td>{data.user_id}</td>
                             <td>{data._id}</td>
-                            {/* <td>{data.attendace_id}</td> */}
                             <td>{data.status}</td>
+                            <td> <input type="text" name="" id="" />{data.remarks}</td>
                         </tr>
                     )
                 })

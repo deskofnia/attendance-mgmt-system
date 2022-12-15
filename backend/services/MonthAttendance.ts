@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import { Attendance } from '../models/attendanceModel';
 
-export default async function dayattendance(req: Request, res: Response) {
-    const { user_id, date } = req.body
+export default async function monthattendance(req: Request, res: Response) {
+    const { user_id, fromdate, todate } = req.body
     
-    await Attendance.find({user_id: user_id, date: date})
+    await Attendance.find({user_id: user_id, date: { $gte:fromdate, $lte:todate}})
     .then(async (data) => {
         await Attendance.aggregate([
             {
