@@ -9,6 +9,13 @@ import './css/ClockInClockOut.css';
 
 export const ClockInAndOut = () => {
 
+  async function geoLocation(){
+    navigator.geolocation.getCurrentPosition(position => {
+    const { latitude, longitude } = position.coords;
+    localStorage.setItem("lat", latitude.toString());
+    localStorage.setItem("long", longitude.toString());
+  });
+
   const now = new Date();
   const clockInHours = () => now.getHours()*60 + now.getMinutes();
   const clockOutHours = ()=> now.getHours()*60 + now.getMinutes();
@@ -16,13 +23,7 @@ export const ClockInAndOut = () => {
   const hours = () =>  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat") + '\nlong:'+localStorage.getItem("long");
   const date = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear();
   // const navigate = useNavigate();
-  async function geoLocation(){
-    navigator.geolocation.getCurrentPosition(position => {
-    const { latitude, longitude } = position.coords;
-    localStorage.setItem("lat", latitude.toString());
-    localStorage.setItem("long", longitude.toString());
-  });
-}
+  
   // eslint-disable-next-line no-useless-concat
  
 
@@ -56,6 +57,8 @@ export const ClockInAndOut = () => {
             addAttendance();
             setButtonText("Clock Out");
             setClockInTime(clockInHours());
+            console.log("Clock In Time==========", clockInTime);
+            
           }
       }
       else{
@@ -65,9 +68,12 @@ export const ClockInAndOut = () => {
             updateAttendance()
             setButtonText("Clock In");
             setClockOutTime(clockOutHours());
+            console.log("Clock In Time==========", clockOutTime);
+            
             
 
             const totalHours = Number(clockOutTime) - Number(clockInTime);
+            console.log("Total Hours", totalHours);
             setEffectiveHrs(totalHours);
 
             if(totalHours < 5)
@@ -113,10 +119,12 @@ export const ClockInAndOut = () => {
     }
   }
   async function addAttendance () {
+    const hrs = hours();
+    console.log("Add time =========",hrs);
     await axios({
       method: "post",
       url: 'http://localhost:5000/api/user/addattendance',
-      data: { date: date, entry: hours, user_id: localStorage.getItem("userid")},
+      data: { date: date, entry: hrs, user_id: localStorage.getItem("userid")},
     }).then((res)=> {
       localStorage.setItem('attendanceid', res.data.user._id);
       getData();
@@ -124,12 +132,14 @@ export const ClockInAndOut = () => {
     .catch((err)=> console.log(err))
   }
   async function updateAttendance() {
+    const hrs = hours();
+    console.log("Update Time===========", hrs);
     await axios({
       method: "post",
       url: 'http://localhost:5000/api/user/updateattendance',
-      data: { exit: hours, id:localStorage.getItem('attendanceid')},
+      data: { exit: hrs, id:localStorage.getItem('attendanceid')},
     }).then((res)=> {
-        console.log("update attendancae ============",res);
+        // console.log("update attendancae ============",res);
         localStorage.removeItem('attendanceid');
         getData();
     })
@@ -171,7 +181,7 @@ export const ClockInAndOut = () => {
         </table>
     </div>
   )
-}
+}}
 
 
 
