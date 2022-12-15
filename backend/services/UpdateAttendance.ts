@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 export default async function updateAttendance(req: Request, res: Response){
     const { exit } = req.body;
     const id = req.body.id;
+    console.log("Inside updateAttendance");
     // Save
     await Attendance.updateOne(
         { _id: id },
@@ -14,9 +15,9 @@ export default async function updateAttendance(req: Request, res: Response){
             $currentDate: { lastUpdated: true }
         }
     )
-    .then(() => {
+    .then((resp) => {
         console.log("Attendace Updated");
-        res.send(res)
+        res.send(resp)
     }
     )
     .catch((err)=>{

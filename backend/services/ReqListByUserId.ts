@@ -22,6 +22,20 @@ export  default async function reqlistbyid(req: Request, res: Response){
                 }
             },
             {
+                $lookup: {
+                     from: "attendances",
+                     localField: "attendance_id",
+                     foreignField: "_id",
+                     as: "attendance"
+                }
+            },
+            {
+                $unwind: {
+                    path: '$attendance', 
+                    preserveNullAndEmptyArrays: true
+                }
+            },
+            {
                 $project: {
                     user_name: "$user.username",
                 }

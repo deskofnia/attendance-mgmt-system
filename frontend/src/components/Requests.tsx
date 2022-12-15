@@ -37,7 +37,7 @@ export const Request = () => {
           url: "http://localhost:5000/api/admin/requestlist",
           // data: { userid: localStorage.getItem("userid"), },
         }).then((res) =>{
-          console.log(res);
+          // console.log(res);
           setRequests(res.data);
         });
       }
@@ -74,8 +74,8 @@ export const Request = () => {
                     <th scope="col">#</th>
                     <th scope="col">UserID</th>
                     <th scope="col">Request ID</th>
+                    <th scope="col">Attendance ID</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Reason</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -89,7 +89,6 @@ export const Request = () => {
                             <td>{user.user_id}</td>
                             <td>{user._id}</td>
                             <td>{user.status}</td>
-                            <td>{user.reason}</td>
                             <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => acceptReq(request[index]?._id)} > Accept </button></td>
                             <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => rejectReq(request[index]?._id)} > Reject </button></td>
                             {/* <td><button onClick={()=>redirect(user._id)}>Show Attendance</button></td> */}
