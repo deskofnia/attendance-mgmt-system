@@ -14,7 +14,7 @@ export const ClockInAndOut = () => {
     const { latitude, longitude } = position.coords;
     localStorage.setItem("lat", latitude.toString());
     localStorage.setItem("long", longitude.toString());
-  });
+  });}
 
   const now = new Date();
   const clockInHours = () => now.getHours()*60 + now.getMinutes();
@@ -181,7 +181,7 @@ export const ClockInAndOut = () => {
         </table>
     </div>
   )
-}}
+}
 
 
 
