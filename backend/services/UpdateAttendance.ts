@@ -2,11 +2,12 @@ import { Attendance } from "../models/attendanceModel";
 import { Request, Response } from 'express';
 
 export default async function updateAttendance(req: Request, res: Response){
-    const { exit, clockOut, clockIn, fromdate, todate } = req.body;
+    const { exit, clockOut, clockIn } = req.body;
     const id = req.body.id;
     let status;
     console.log("Inside updateAttendance");
     const totalHours = clockOut-Number(clockIn);
+    console.log("totalHours: " + totalHours);
     if(totalHours > 9)
     {
         status = "Full Day";

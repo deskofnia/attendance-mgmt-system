@@ -63,6 +63,7 @@ export const ClockInAndOut = () => {
             });
             updateAttendance()
             setButtonText("Clock In");
+            localStorage.removeItem("");
           }
       }
     });

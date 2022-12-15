@@ -11,6 +11,7 @@ export default async function addAttendance(req: Request, res: Response){
 
     // Save
     await attendance.save((err, user) => {
+        console.log("Errorrrrrrrrr=====",err, "Userrrrrrrr===", user);
         if (err) {
             return res.status(400).json({ msg: (err) });
         }
