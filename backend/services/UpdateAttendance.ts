@@ -2,8 +2,7 @@ import { Attendance } from "../models/attendanceModel";
 import { Request, Response } from 'express';
 
 export default async function updateAttendance(req: Request, res: Response){
-    const { exit, clockOut, clockIn } = req.body;
-    const id = req.body.id;
+    const { exit, clockOut, clockIn, id } = req.body;
     let status;
     console.log("Inside updateAttendance");
     const totalHours = clockOut-Number(clockIn);
@@ -30,13 +29,13 @@ export default async function updateAttendance(req: Request, res: Response){
             $currentDate: { lastUpdated: true }
         }
     )
-    .then((resp) => {
-        console.log("Attendace Updated");
-        res.send(resp)
+    .then((data) => {
+        // console.log("Attendace Updated");
+        res.send({data: data, success: true, message: "Attendance Updated"});
     }
     )
     .catch((err)=>{
-        return res.status(400).json({msg: (err)});
+        return res.status(400).json({data:{}, success:false, message: err});
     })
     // res.json("Updated");
 }

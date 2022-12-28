@@ -17,22 +17,21 @@ export default async function dayattendance(req: Request, res: Response) {
             },
             {
                 $unwind:{
-                    path:'$attendace',
+                    path:'$attendance',
                     preserveNullAndEmptyArrays: true
                 }
             }
         ]);
 
         if (!data)
-            res.status(404).send({ message: "Not Found !!" });
+            res.status(404).send({data:{}, success:false, message: "Not Found !!" });
         else {
-            console.log(data.length);
-            res.send(data);
+            // console.log(data.length);
+            res.send({data:{}, success:true, message:"Attendance Found"});
         }
-            
     })
     .catch(err => {
-        res.status(500).send({ message: err.message || "error occured" });
+        res.status(500).send({data:{}, success:false, message: err.message || "error occured" });
     })
 }
 

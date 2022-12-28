@@ -44,14 +44,13 @@ export  default async function reqlistbyid(req: Request, res: Response){
         
 
         if (!data)
-            res.status(404).send({ message: "Not Found !!" });
+            res.status(404).send({ data:{}, success:false, message: "Request Not Found !!" });
         else {
             // console.log(data);
-            res.send(data);
+            res.send({data:data, success:true, message:"Request Found"});
         }
-            
     })
     .catch(err => {
-        res.status(500).send({ message: err.message || "error occured" });
+        res.status(500).send({ data:{}, success:false, message: err.message || "error occured" });
     });
 }
