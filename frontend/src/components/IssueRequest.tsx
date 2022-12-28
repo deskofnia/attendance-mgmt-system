@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { IRequest } from '../Interfaces/commonInterfaces';
 import './css/IssueRequest.css';
 
@@ -7,6 +8,7 @@ import './css/IssueRequest.css';
 export const IssueRequest = () => {
 
   const [ request, setRequest] = useState<IRequest[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getData();
@@ -49,6 +51,7 @@ export const IssueRequest = () => {
                 })
             }
             </tbody>
+            <button onClick={()=> navigate(`/user/${localStorage.getItem('userid')}`)}>Back</button>
         </table>
     </div>
   )
