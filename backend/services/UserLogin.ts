@@ -9,7 +9,7 @@ export default async function login(req: Request, res: Response) {
     const user = await User.findOne({email: req.body.email});
 
     // If user is found
-    console.log(user);
+    // console.log(user);
     if(user)
     {
         const compare = await bcrypt.compare(req.body.password, user.password)
@@ -25,7 +25,7 @@ export default async function login(req: Request, res: Response) {
 
         // return response with user and send to client
         const { _id, role, email, password, status, username } = user;
-        return res.json({data:token, user: {_id, role, email, password, status, username }, success:true, message:"Logged in successfully"});
+        return res.json({token:token, user: {_id, role, email, password, status, username }, success:true, message:"Logged in successfully"});
     }
     else
         return res.status(400).json({ data:{}, success:false, message: {err: "User not fuond"}});

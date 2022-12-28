@@ -6,7 +6,6 @@ import routes from './routes/routes';
 import * as dotenv from "dotenv";
 dotenv.config({ path: '.env'})
 
-console.log("Dotenv=========",process.env.PORT);
 
 // execute database connection
 dbConnect();

@@ -21,7 +21,7 @@ export default function SignUp() {
     axios.post("http://localhost:5000/api/register", data)
     .then((res) =>{
       console.log(res)
-
+      
       toast('User Added Successfully 👽. You will be redirected to login page in 3 seconds', {
         position: "top-right",
         autoClose: 3000,

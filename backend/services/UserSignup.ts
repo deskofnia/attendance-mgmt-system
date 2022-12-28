@@ -9,15 +9,21 @@ export default async function signup(req: Request, res: Response){
 
     const password = await bcrypt.hash(req.body.password, 10);
 
-    // Create New User
-    const user = await User.create({username, email, password, role:ROLES.USER, status:STATUS.ACTIVE});
-    // Save
-    await user.save((err, user) => {
-    if (err) {
-      return res.status(400).json({ data:{}, success:false, message: err });
+    const exist = await User.findOne({ email: email})
+    if(exist)
+    {
+      res.json({data:exist, success: true, message:"User already exist"});
     }
-    res.json( {data:user, success:true, message:"Sign Up Successfully"} );
-    })
-
-    console.log("User Created: ", user);
+    else
+    {
+      //Ceate New User
+      const user = await User.create({username, email, password, role:ROLES.USER, status:STATUS.ACTIVE});
+      // Save
+      user.save((err, user) => {
+      if (err) {
+        return res.status(400).json({ data:{}, success:false, message: err });
+      }
+        res.json( {data:user, success:true, message:"Sign Up Successfully"} );
+      });
+    }
 }

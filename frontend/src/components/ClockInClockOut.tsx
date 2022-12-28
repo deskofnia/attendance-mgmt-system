@@ -9,12 +9,6 @@ import './css/ClockInClockOut.css';
 
 export const ClockInAndOut = () => {
 
-  navigator.geolocation.getCurrentPosition(position => {
-    const { latitude, longitude } = position.coords;
-    localStorage.setItem("lat", latitude.toString());
-    localStorage.setItem("long", longitude.toString());
-  });
-
   const now = new Date();
   const clockInHours = () => now.getHours()*60 + now.getMinutes();
   const clockOutHours = ()=> now.getHours()*60 + now.getMinutes();
@@ -44,13 +38,20 @@ export const ClockInAndOut = () => {
       data: { user_id: localStorage.getItem("userid"), date: date},
     }).then((res) => {
 
+      console.log("Day attendance===", res);
+
       if(res.data.length === 0 ){
 
         if(buttonText==="Clock In")
           {
+            navigator.geolocation.getCurrentPosition(position => {
+              const { latitude, longitude } = position.coords;
+              localStorage.setItem("lat", latitude.toString());
+              localStorage.setItem("long", longitude.toString());
+            });
+
             addAttendance();
             setButtonText("Clock Out");
-            
           }
       }
       else{
@@ -76,8 +77,8 @@ export const ClockInAndOut = () => {
       url: "http://localhost:5000/api/user/attendance",
       data: { user_id: localStorage.getItem("userid")},
     }).then((res) =>{
-      // console.log(res);
-      setAttendance(res.data);
+      console.log("Attendance response ============",res);
+      setAttendance(res.data.data);
     });
   }
 
@@ -88,6 +89,7 @@ export const ClockInAndOut = () => {
         url: 'http://localhost:5000/api/user/issuerequest',
         data: { attendance_id: id, user_id: localStorage.getItem("userid")},
       }).then((res)=> {
+        console.log("Issue request ============",res);
         setReq("Requested");
         getData();
       })
@@ -98,12 +100,12 @@ export const ClockInAndOut = () => {
     const hrs = hours();
     const clockIn = clockInHours();
     localStorage.setItem("clockIn", clockIn.toString());
-    console.log("Add time =========",hrs);
     await axios({
       method: "post",
       url: 'http://localhost:5000/api/user/addattendance',
       data: { date: date, entry: hrs, user_id: localStorage.getItem("userid"), clockIn:clockIn },
     }).then((res)=> {
+      console.log("Add attendance =========",res);
       localStorage.setItem('attendanceid', res.data.user._id);
       getData();
     })
@@ -112,13 +114,12 @@ export const ClockInAndOut = () => {
   async function updateAttendance() {
     const hrs = hours();
     const clockOut = clockOutHours();
-    console.log("Update Time===========", hrs);
     await axios({
       method: "post",
       url: 'http://localhost:5000/api/user/updateattendance',
       data: { exit: hrs, clockOut:clockOut, id:localStorage.getItem('attendanceid'), clockIn:localStorage.getItem('clockIn')},
-    }).then(()=> {
-        // console.log("update attendancae ============",res);
+    }).then((res)=> {
+        console.log("update attendancae ============",res);
         localStorage.removeItem('attendanceid');
         getData();
     })
@@ -157,6 +158,7 @@ export const ClockInAndOut = () => {
                 })
               }
             </tbody>
+
             <button onClick={() =>navigate(`/user/${localStorage.getItem("userid")}/issuerequest`) }>Check Request Remarks</button>
         </table>
     </div>
