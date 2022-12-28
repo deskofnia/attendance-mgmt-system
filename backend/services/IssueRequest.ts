@@ -7,11 +7,11 @@ export default async function issueReq(req: Request, res: Response){
     // Create New Book Issue Request
     const issueRequest = new Req({ user_id, attendance_id, status:REQSTATUS.PENDING });
     
-    await issueRequest.save((err) => {
+    await issueRequest.save((err, data) => {
       if(err)
       {
         return res.status(400).json({data:{}, success:false, message:err});
       }
-      return res.status(200).json({data:{}, success:true, message:"Request saved successfully"});
+      return res.status(200).json({data:data, success:true, message:"Request saved successfully"});
     })
 }

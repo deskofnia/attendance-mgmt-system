@@ -27,7 +27,7 @@ export default async function dayattendance(req: Request, res: Response) {
             res.status(404).send({data:{}, success:false, message: "Not Found !!" });
         else {
             // console.log(data.length);
-            res.send({data:{}, success:true, message:"Attendance Found"});
+            res.send({data:data, success:true, message:"Attendance Found"});
         }
     })
     .catch(err => {

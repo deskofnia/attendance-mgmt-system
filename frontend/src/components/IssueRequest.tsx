@@ -18,8 +18,8 @@ export const IssueRequest = () => {
       url: "http://localhost:5000/api/user/requestlistbyid",
       data: { user_id: localStorage.getItem("userid"), },
     }).then((res) =>{
-      // console.log(res);
-      setRequest(res.data);
+      console.log("Req status=====",res);
+      setRequest(res.data.data);
     });
   }
 
@@ -32,7 +32,6 @@ export const IssueRequest = () => {
                     <th scope="col">UserID</th>
                     <th scope="col">Request Id</th>
                     <th scope="col">Status</th>
-                    <th scope="col">Remarks</th>
                     <th></th>
                 </tr>
             </thead>
@@ -45,7 +44,6 @@ export const IssueRequest = () => {
                             <td>{data.user_id}</td>
                             <td>{data._id}</td>
                             <td>{data.status}</td>
-                            <td> <input type="text" name="" id="" />{data.remarks}</td>
                         </tr>
                     )
                 })

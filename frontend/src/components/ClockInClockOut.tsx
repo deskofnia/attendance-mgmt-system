@@ -13,13 +13,14 @@ export const ClockInAndOut = () => {
   const clockInHours = () => now.getHours()*60 + now.getMinutes();
   const clockOutHours = ()=> now.getHours()*60 + now.getMinutes();
   // eslint-disable-next-line no-useless-concat
-  const hours = () =>  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat") + '\nlong:'+localStorage.getItem("long");
+  const lat=localStorage.getItem("lat");
+  const long=localStorage.getItem("long");
+
+  const hours = () =>  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+lat+ '\nlong:'+long;
   const date = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear();
   const navigate = useNavigate();
   
   // eslint-disable-next-line no-useless-concat
- 
-
   const [attendance, setAttendance] = useState<IAttendance[]>([]);
 
   const [buttonText, setButtonText] = useState("Clock In");
@@ -38,10 +39,9 @@ export const ClockInAndOut = () => {
       data: { user_id: localStorage.getItem("userid"), date: date},
     }).then((res) => {
 
-      console.log("Day attendance===", res);
+      console.log("Day attendance====", res);
 
-      if(res.data.length === 0 ){
-
+      if(res.data.data.length === 0 ){
         if(buttonText==="Clock In")
           {
             navigator.geolocation.getCurrentPosition(position => {
@@ -50,8 +50,9 @@ export const ClockInAndOut = () => {
               localStorage.setItem("long", longitude.toString());
             });
 
-            addAttendance();
             setButtonText("Clock Out");
+            addAttendance();
+            
           }
       }
       else{
@@ -62,8 +63,8 @@ export const ClockInAndOut = () => {
               localStorage.setItem("lat", latitude.toString());
               localStorage.setItem("long", longitude.toString());
             });
-            updateAttendance()
             setButtonText("Clock In");
+            updateAttendance()
             localStorage.removeItem("");
           }
       }
@@ -96,6 +97,7 @@ export const ClockInAndOut = () => {
       .catch((err)=> console.log(err));
     }
   }
+
   async function addAttendance () {
     const hrs = hours();
     const clockIn = clockInHours();
@@ -106,11 +108,12 @@ export const ClockInAndOut = () => {
       data: { date: date, entry: hrs, user_id: localStorage.getItem("userid"), clockIn:clockIn },
     }).then((res)=> {
       console.log("Add attendance =========",res);
-      localStorage.setItem('attendanceid', res.data.user._id);
+      localStorage.setItem('attendanceid', res.data.data.user._id);
       getData();
     })
     .catch((err)=> console.log(err))
   }
+
   async function updateAttendance() {
     const hrs = hours();
     const clockOut = clockOutHours();

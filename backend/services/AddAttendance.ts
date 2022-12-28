@@ -8,7 +8,7 @@ export default async function addAttendance(req: Request, res: Response){
     const { user_id, date, entry, clockIn } = req.body;
     // console.log(user_id, date, entry);
     console.log("Inside addAttendance");
-    const attendance = await Attendance.create({ user_id, date, entry, exit:DATETIME.EXIT, clockInHours:clockIn, clockOutHours:DATETIME.CLOCK_OUT_HRS, totalHours:DATETIME.TOTAL_HRS, status:DATETIME.TOTAL_HRS, fromdate:DATETIME.FROMDATE, todate:DATETIME.TODATE });
+    const attendance = await Attendance.create({ user_id, date, entry, exit:DATETIME.EXIT, clockInHours:clockIn, clockOutHours:DATETIME.CLOCK_OUT_HRS, totalHours:DATETIME.TOTAL_HRS, status:DATETIME.STATUS, fromdate:DATETIME.FROMDATE, todate:DATETIME.TODATE });
 
     // Save
     attendance.save((err, user) => {
