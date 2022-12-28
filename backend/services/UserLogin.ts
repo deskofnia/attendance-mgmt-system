@@ -17,7 +17,7 @@ export default async function login(req: Request, res: Response) {
         // create authenticate method in user model
         if(!compare)
         {
-            return res.status(401).json({err: "Invalid Credentials"})
+            return res.status(401).json({data:{}, success:false, message:{err: "Invalid Credentials"}})
         }
 
         // generate a signed token with user id and secret
@@ -25,9 +25,9 @@ export default async function login(req: Request, res: Response) {
 
         // return response with user and send to client
         const { _id, role, email, password, status, username } = user;
-        return res.json({token, user: {_id, role, email, password, status, username }});
+        return res.json({data:token, user: {_id, role, email, password, status, username }, success:true, message:"Logged in successfully"});
     }
     else
-        return res.status(400).json({err: "User not fuond"});
+        return res.status(400).json({ data:{}, success:false, message: {err: "User not fuond"}});
 
 }

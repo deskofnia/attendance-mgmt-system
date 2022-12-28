@@ -17,7 +17,7 @@ export default async function monthattendance(req: Request, res: Response) {
             },
             {
                 $unwind:{
-                    path:'$attendace',
+                    path:'$attendance',
                     preserveNullAndEmptyArrays: true
                 }
             }

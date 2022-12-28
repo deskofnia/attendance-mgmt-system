@@ -16,22 +16,22 @@ export default async function attendancelist(req: Request, res: Response) {
             },
             {
                 $unwind:{
-                    path:'$attendace',
+                    path:'$attendance',
                     preserveNullAndEmptyArrays: true
                 }
             }
         ]);
 
         if (!data)
-            res.status(404).send({ message: "Not Found !!" });
+            res.status(404).send({ data:{}, success:false, message: "Not Found !!" });
         else {
-            console.log(data);
-            res.send(data);
+            // console.log(data);
+            res.send({data:data, success:true, message:"Attendance list found successfully"});
         }
             
     })
     .catch(err => {
-        res.status(500).send({ message: err.message || "error occured" });
+        res.status(500).send({ data:{}, success:false, message: err.message || "error occured" });
     })
 }
 
