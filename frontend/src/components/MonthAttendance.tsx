@@ -23,7 +23,7 @@ export const MonthlyAttendance = () => {
           url: "http://localhost:5000/api/user/attendance",
           data: { user_id: localStorage.getItem("userid")},
         }).then((res) =>{
-            setAttendance(res.data);
+            setAttendance(res.data.data);
         });
       }
 
@@ -33,7 +33,7 @@ export const MonthlyAttendance = () => {
             url: "http://localhost:5000/api/user/monthlyattendance",
             data: { user_id: localStorage.getItem("userid"), fromdate: startDate, todate: endDate},
           }).then((res) =>{
-              setAttendance(res.data);
+              setAttendance(res.data.data);
           });
       }
 

@@ -19,7 +19,7 @@ export const Attendance = () => {
         //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
           data: { user_id: localStorage.getItem("userid")},
         }).then((res) =>{
-            setAttendance(res.data);
+            setAttendance(res.data.data);
         });
       }
 
