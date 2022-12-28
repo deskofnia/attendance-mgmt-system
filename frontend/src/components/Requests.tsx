@@ -28,7 +28,7 @@ export const Request = () => {
     }, []);
 
     async function dashboard() {
-        navigate(`/admin/${localStorage.getItem('adminId')}`);
+      navigate(`/admin/${localStorage.getItem('adminId')}`);
     }
 
     const getData = async ()=>{
@@ -38,7 +38,7 @@ export const Request = () => {
           // data: { userid: localStorage.getItem("userid"), },
         }).then((res) =>{
           // console.log(res);
-          setRequests(res.data);
+          setRequests(res.data.data);
         });
       }
 

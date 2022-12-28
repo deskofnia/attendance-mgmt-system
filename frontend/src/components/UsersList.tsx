@@ -29,7 +29,7 @@ export const UserList = () => {
       method: "get",
       url: "http://localhost:5000/api/userslist",
     }).then((res) =>{
-        setUsers(res.data);
+        setUsers(res.data.data);
       });
     }
 
