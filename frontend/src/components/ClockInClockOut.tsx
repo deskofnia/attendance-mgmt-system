@@ -10,13 +10,9 @@ import './css/ClockInClockOut.css';
 export const ClockInAndOut = () => {
 
   const now = new Date();
-  const clockInHours = () => now.getHours()*60 + now.getMinutes();
-  const clockOutHours = ()=> now.getHours()*60 + now.getMinutes();
   // eslint-disable-next-line no-useless-concat
-  const lat=localStorage.getItem("lat");
-  const long=localStorage.getItem("long");
 
-  const hours = () =>  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+lat+ '\nlong:'+long;
+  
   const date = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear();
   const navigate = useNavigate();
   
@@ -99,8 +95,8 @@ export const ClockInAndOut = () => {
   }
 
   async function addAttendance () {
-    const hrs = hours();
-    const clockIn = clockInHours();
+    const hrs =  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat")+ '\nlong:'+localStorage.getItem("long");
+    const clockIn = now.getHours()*60 + now.getMinutes();
     localStorage.setItem("clockIn", clockIn.toString());
     await axios({
       method: "post",
@@ -108,15 +104,15 @@ export const ClockInAndOut = () => {
       data: { date: date, entry: hrs, user_id: localStorage.getItem("userid"), clockIn:clockIn },
     }).then((res)=> {
       console.log("Add attendance =========",res);
-      localStorage.setItem('attendanceid', res.data.data.user._id);
+      localStorage.setItem('attendanceid', res.data.data._id);
       getData();
     })
     .catch((err)=> console.log(err))
   }
 
   async function updateAttendance() {
-    const hrs = hours();
-    const clockOut = clockOutHours();
+    const hrs =  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat")+ '\nlong:'+localStorage.getItem("long");
+    const clockOut = now.getHours()*60 + now.getMinutes();
     await axios({
       method: "post",
       url: 'http://localhost:5000/api/user/updateattendance',
@@ -148,16 +144,16 @@ export const ClockInAndOut = () => {
               {
                 attendance.map((data, index) => {
                     return(
-                        <tr className="active-row" key={index}>
-                            <td>{index + 1}</td>
-                            <td>{data.date}</td>
-                            <td>{data.entry}</td>
-                            <td>{data.exit}</td>
-                            <td>{data.totalHours}</td>
-                            <td>{data.status}</td>
-                            <td> {data.status !== 'Full Day'? <button onClick={()=>issueReq(data._id)}>{req}</button>: "" } </td>
-                        </tr>
-                    )
+                      <tr className="active-row" key={index}>
+                          <td>{index + 1}</td>
+                          <td>{data.date}</td>
+                          <td>{data.entry}</td>
+                          <td>{data.exit}</td>
+                          <td>{data.totalHours}</td>
+                          <td>{data.status}</td>
+                          <td> {data.status !== 'Full Day'? <button onClick={()=>issueReq(data._id)}>{req}</button>: "" } </td>
+                      </tr>
+                  )
                 })
               }
             </tbody>
