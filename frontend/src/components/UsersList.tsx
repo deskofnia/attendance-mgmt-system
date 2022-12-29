@@ -28,6 +28,7 @@ export const UserList = () => {
     await axios({
       method: "get",
       url: "http://localhost:5000/api/userslist",
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")}
     }).then((res) =>{
         setUsers(res.data.data);
       });

@@ -14,22 +14,23 @@ import {ReqListById} from '../controllers/ReqListByUserId';
 import { DayAttendance } from '../controllers/DayAttendanceController';
 import { MonthAttendance } from '../controllers/MonthAttendanceController';
 import { UpdateReqAttendance } from '../controllers/UpdateReqController';
+import auth from '../middleware/auth';
 
 const routes = Router();
 
 routes.post('/register', SignUp);
 routes.post('/login', LogIn);
-routes.get('/userslist', ListUsers);
+routes.get('/userslist', auth,ListUsers);
 routes.get('/user/finduser', FindOneUser);
-routes.get('/admin/requestlist', ReqList);
+routes.get('/admin/requestlist',auth, ReqList);
 routes.post('/user/changerequest', ChangeRequest)
 routes.post('/user/issuerequest', IssueReq);
-routes.post('/user/attendance', AttendanceList);
+routes.post('/user/attendance',AttendanceList);
 routes.post('/user/monthlyattendance', MonthAttendance);
-routes.post('/user/dayattendance', DayAttendance);
-routes.post('user/requestlistbyid', ReqListById);
-routes.post('/user/addattendance', AddAttendance);
-routes.route('/user/updateattendance').post(UpdateAttendance);
+routes.post('/user/dayattendance',DayAttendance);
+routes.post('user/requestlistbyid',ReqListById);
+routes.post('/user/addattendance',AddAttendance);
+routes.route('/user/updateattendance').post( UpdateAttendance);
 routes.route('/user/updatereqattendance').post(UpdateReqAttendance);
 routes.route('/editstatus').put(EditStatus);
 

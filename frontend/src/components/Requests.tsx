@@ -35,9 +35,9 @@ export const Request = () => {
         await axios({
           method: "get",
           url: "http://localhost:5000/api/admin/requestlist",
-          // data: { userid: localStorage.getItem("userid"), },
+          headers: { authorization: 'Bearer ' + localStorage.getItem("token")}
+
         }).then((res) =>{
-          // console.log(res);
           setRequests(res.data.data);
         });
     }
@@ -89,7 +89,7 @@ export const Request = () => {
     }).then(async (res)=> {
       await axios({
         method: "post",
-        url: 'http://localhost:5000/api/user/updateattendance',
+        url: 'http://localhost:5000/api/user/updatereqattendance',
         data: { id:localStorage.getItem('attendanceid'), status:'Absent', totalHrs:0},
       }).then((res)=> {
           console.log("update req attendancae ============",res);

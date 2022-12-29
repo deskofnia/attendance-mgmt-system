@@ -26,7 +26,7 @@ export default function LogIn() {
       
       if(res.data.user.role ==="user")
       {
-        localStorage.setItem("userid", res.data.user._id);
+        localStorage.setItem("token", res.data.token);
         const id = localStorage.getItem("userid");  
         
         if(res.data.user.status === "active") {
@@ -60,8 +60,10 @@ export default function LogIn() {
       }
       else
       {
+        localStorage.setItem("token", res.data.token);
         localStorage.setItem("adminId", res.data.user._id);
         const id = localStorage.getItem("adminId");
+        
 
         toast('Logged In Successfully 🎉. You will be redirected to admin page in 3 seconds', {
           position: "top-center",

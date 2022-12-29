@@ -77,7 +77,7 @@ export const MonthlyAttendance = () => {
                         <th scope="col">Date</th>
                         <th scope="col">Entry Time</th>
                         <th scope="col">Exit Time</th>
-                        {/* <th scope="col">ID</th> */}
+                        <th scope="col">Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -89,6 +89,8 @@ export const MonthlyAttendance = () => {
                                 <td>{data.date}</td>
                                 <td>{data.entry}</td>
                                 <td>{data.exit}</td>
+                                <td>{data.status}</td>
+
                             </tr>
                         )
                     })
