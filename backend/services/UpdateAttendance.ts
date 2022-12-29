@@ -4,8 +4,7 @@ import { Request, Response } from 'express';
 export default async function updateAttendance(req: Request, res: Response){
     const { exit, clockOut, clockIn, id } = req.body;
     let status;
-    console.log("Inside updateAttendance");
-    const totalHours = clockOut-Number(clockIn);
+    const totalHours = +((clockOut-Number(clockIn))/60).toPrecision(6);
     console.log("totalHours: " + totalHours);
     if(totalHours > 9)
     {

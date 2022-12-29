@@ -15,7 +15,7 @@ export const ClockInAndOut = () => {
   
   const date = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear();
   const navigate = useNavigate();
-  
+
   // eslint-disable-next-line no-useless-concat
   const [attendance, setAttendance] = useState<IAttendance[]>([]);
 
@@ -33,35 +33,35 @@ export const ClockInAndOut = () => {
       method: "post",
       url: "http://localhost:5000/api/user/dayattendance",
       data: { user_id: localStorage.getItem("userid"), date: date},
-    }).then((res) => {
+    }).then(async (res) => {
 
       console.log("Day attendance====", res);
 
       if(res.data.data.length === 0 ){
-        if(buttonText==="Clock In")
-          {
-            navigator.geolocation.getCurrentPosition(position => {
-              const { latitude, longitude } = position.coords;
-              localStorage.setItem("lat", latitude.toString());
-              localStorage.setItem("long", longitude.toString());
-            });
+        
+        navigator.geolocation.getCurrentPosition(async position => {
+          const { latitude, longitude } = position.coords;
+          localStorage.setItem("lat", latitude.toString());
+          localStorage.setItem("long", longitude.toString());
+        });
 
-            setButtonText("Clock Out");
-            addAttendance();
-            
-          }
+        if(buttonText==="Clock In")
+        {
+          setButtonText("Clock Out");
+          addAttendance(); 
+        }
       }
       else{
+        await navigator.geolocation.getCurrentPosition(position => {
+          const { latitude, longitude } = position.coords;
+          localStorage.setItem("lat", latitude.toString());
+          localStorage.setItem("long", longitude.toString());
+        });
+
         if(buttonText==="Clock Out")
           {  
-            navigator.geolocation.getCurrentPosition(position => {
-              const { latitude, longitude } = position.coords;
-              localStorage.setItem("lat", latitude.toString());
-              localStorage.setItem("long", longitude.toString());
-            });
             setButtonText("Clock In");
             updateAttendance()
-            localStorage.removeItem("");
           }
       }
     });
@@ -95,13 +95,13 @@ export const ClockInAndOut = () => {
   }
 
   async function addAttendance () {
-    const hrs =  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat")+ '\nlong:'+localStorage.getItem("long");
+    const entryTime =  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat")+ '\nlong:'+localStorage.getItem("long");
     const clockIn = now.getHours()*60 + now.getMinutes();
     localStorage.setItem("clockIn", clockIn.toString());
     await axios({
       method: "post",
       url: 'http://localhost:5000/api/user/addattendance',
-      data: { date: date, entry: hrs, user_id: localStorage.getItem("userid"), clockIn:clockIn },
+      data: { date: date, entry: entryTime, user_id: localStorage.getItem("userid"), clockIn:clockIn },
     }).then((res)=> {
       console.log("Add attendance =========",res);
       localStorage.setItem('attendanceid', res.data.data._id);
@@ -111,12 +111,12 @@ export const ClockInAndOut = () => {
   }
 
   async function updateAttendance() {
-    const hrs =  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat")+ '\nlong:'+localStorage.getItem("long");
+    const exitTime =  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat")+ '\nlong:'+localStorage.getItem("long");
     const clockOut = now.getHours()*60 + now.getMinutes();
     await axios({
       method: "post",
       url: 'http://localhost:5000/api/user/updateattendance',
-      data: { exit: hrs, clockOut:clockOut, id:localStorage.getItem('attendanceid'), clockIn:localStorage.getItem('clockIn')},
+      data: { exit: exitTime, clockOut:clockOut, id:localStorage.getItem('attendanceid'), clockIn:localStorage.getItem('clockIn')},
     }).then((res)=> {
         console.log("update attendancae ============",res);
         localStorage.removeItem('attendanceid');
@@ -163,8 +163,5 @@ export const ClockInAndOut = () => {
     </div>
   )
 }
-
-
-
 
 

@@ -30,6 +30,7 @@ export interface IAttendance{
 }
 
 export interface IRequest {
+    attendance_id: string,
     _id: string,
     user_id: string,
     status: string,

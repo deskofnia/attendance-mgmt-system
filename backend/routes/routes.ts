@@ -13,6 +13,7 @@ import { ChangeRequest } from '../controllers/ChangeReqController';
 import {ReqListById} from '../controllers/ReqListByUserId';
 import { DayAttendance } from '../controllers/DayAttendanceController';
 import { MonthAttendance } from '../controllers/MonthAttendanceController';
+import { UpdateReqAttendance } from '../controllers/UpdateReqController';
 
 const routes = Router();
 
@@ -29,6 +30,7 @@ routes.post('/user/dayattendance', DayAttendance);
 routes.post('user/requestlistbyid', ReqListById);
 routes.post('/user/addattendance', AddAttendance);
 routes.route('/user/updateattendance').post(UpdateAttendance);
+routes.route('/user/updatereqattendance').post(UpdateReqAttendance);
 routes.route('/editstatus').put(EditStatus);
 
 export default routes;

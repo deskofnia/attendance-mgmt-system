@@ -2,11 +2,10 @@ import { Request, RequestHandler, Response } from 'express';
 import { Req } from '../models/requestModel';
 
 export  default async function reqlistbyid(req: Request, res: Response){    
-
+    console.log("Im in..........");
     await Req.find({user_id: req.body.user_id})//
     .then((data) =>
     {
-
         Req.aggregate([
             {
                 $lookup: {

@@ -14,9 +14,9 @@ export default async function changeReq(req: Request, res: Response){
             $currentDate: { lastUpdated: true }
         }
     )
-    .then(() => {
+    .then((data) => {
         // console.log("Status Updated");
-        res.send({data:{}, success:true, message:"Status Updated"})
+        res.send({data:data, success:true, message:"Status Updated"})
     })
     .catch((err) => {
         return res.status(400).json({data:{}, success:false, message: err});

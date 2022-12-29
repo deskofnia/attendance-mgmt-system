@@ -40,9 +40,8 @@ export const Request = () => {
           // console.log(res);
           setRequests(res.data.data);
         });
-      }
+    }
 
-  
 
   async function acceptReq (id:string) {
 
@@ -50,7 +49,15 @@ export const Request = () => {
       method: "post",
       url: `http://localhost:5000/api/user/changerequest?id=${id}`,
       data: { status: 'Full Day'},
-    }).then((res)=> {
+    }).then(async (res)=> {
+
+      await axios({
+        method: "post",
+        url: 'http://localhost:5000/api/user/updatereqattendance',
+        data: { id:localStorage.getItem('attendanceid'), status:'Full Day', totalHrs:9},
+      }).then((res)=> {
+          console.log("update req attendancae ============",res);
+      })
         getData();
     });
   }
@@ -60,8 +67,35 @@ export const Request = () => {
       method: "post",
       url: `http://localhost:5000/api/user/changerequest?id=${id}`,
       data: { status: 'Half Day'},
-    }).then((res)=> {
-        getData();
+    }).then(async (res)=> {
+
+      await axios({
+        method: "post",
+        url: 'http://localhost:5000/api/user/updatereqattendance',
+        data: { id:localStorage.getItem('attendanceid'), status:'Half Day', totalHrs:5},
+      }).then((res)=> {
+          console.log("update req attendancae ============",res);
+      })
+
+      getData();
+    });
+  }
+
+  async function pendingReq (id:string) {
+    await axios({
+      method: "post",
+      url: `http://localhost:5000/api/user/changerequest?id=${id}`,
+      data: { status: 'pending'},
+    }).then(async (res)=> {
+      await axios({
+        method: "post",
+        url: 'http://localhost:5000/api/user/updateattendance',
+        data: { id:localStorage.getItem('attendanceid'), status:'Absent', totalHrs:0},
+      }).then((res)=> {
+          console.log("update req attendancae ============",res);
+      })
+      
+      getData();
     });
   }
 
@@ -73,9 +107,9 @@ export const Request = () => {
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">UserID</th>
-                    <th scope="col">Request ID</th>
                     <th scope="col">Attendance ID</th>
                     <th scope="col">Status</th>
+                    <th></th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -87,11 +121,11 @@ export const Request = () => {
                         <tr className='active-row' key={index}>
                             <td>{index + 1}</td>
                             <td>{user.user_id}</td>
-                            <td>{user._id}</td>
+                            <td>{user.attendance_id}</td>
                             <td>{user.status}</td>
                             <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => acceptReq(request[index]?._id)} > Accept </button></td>
                             <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => rejectReq(request[index]?._id)} > Reject </button></td>
-                            {/* <td><button onClick={()=>redirect(user._id)}>Show Attendance</button></td> */}
+                            <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => pendingReq(request[index]?._id)}> Pending </button></td>
                         </tr>
                     )
                 })

@@ -12,6 +12,6 @@ export default async function issueReq(req: Request, res: Response){
       {
         return res.status(400).json({data:{}, success:false, message:err});
       }
-      return res.status(200).json({data:data, success:true, message:"Request saved successfully"});
+      return res.status(200).json({data:data, success:true, message:"Request issued successfully"});
     })
 }
