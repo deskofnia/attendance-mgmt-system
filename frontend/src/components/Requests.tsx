@@ -23,8 +23,7 @@ export const Request = () => {
 
     
     useEffect(() => {
-        
-        getData();
+      getData();
     }, []);
 
     async function dashboard() {
@@ -36,7 +35,6 @@ export const Request = () => {
           method: "get",
           url: "http://localhost:5000/api/admin/requestlist",
           headers: { authorization: 'Bearer ' + localStorage.getItem("token")}
-
         }).then((res) =>{
           setRequests(res.data.data);
         });
@@ -48,12 +46,14 @@ export const Request = () => {
     await axios({
       method: "post",
       url: `http://localhost:5000/api/user/changerequest?id=${id}`,
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { status: 'Full Day'},
     }).then(async (res)=> {
 
       await axios({
         method: "post",
         url: 'http://localhost:5000/api/user/updatereqattendance',
+        headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
         data: { id:localStorage.getItem('attendanceid'), status:'Full Day', totalHrs:9},
       }).then((res)=> {
           console.log("update req attendancae ============",res);
@@ -66,12 +66,14 @@ export const Request = () => {
     await axios({
       method: "post",
       url: `http://localhost:5000/api/user/changerequest?id=${id}`,
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { status: 'Half Day'},
     }).then(async (res)=> {
 
       await axios({
         method: "post",
         url: 'http://localhost:5000/api/user/updatereqattendance',
+        headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
         data: { id:localStorage.getItem('attendanceid'), status:'Half Day', totalHrs:5},
       }).then((res)=> {
           console.log("update req attendancae ============",res);
@@ -85,11 +87,13 @@ export const Request = () => {
     await axios({
       method: "post",
       url: `http://localhost:5000/api/user/changerequest?id=${id}`,
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { status: 'pending'},
     }).then(async (res)=> {
       await axios({
         method: "post",
         url: 'http://localhost:5000/api/user/updatereqattendance',
+        headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
         data: { id:localStorage.getItem('attendanceid'), status:'Absent', totalHrs:0},
       }).then((res)=> {
           console.log("update req attendancae ============",res);

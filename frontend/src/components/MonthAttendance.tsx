@@ -21,6 +21,7 @@ export const MonthlyAttendance = () => {
         await axios({
           method: "post",
           url: "http://localhost:5000/api/user/attendance",
+          headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
           data: { user_id: localStorage.getItem("userid")},
         }).then((res) =>{
             setAttendance(res.data.data);
@@ -31,6 +32,7 @@ export const MonthlyAttendance = () => {
         await axios({
             method: "post",
             url: "http://localhost:5000/api/user/monthlyattendance",
+            headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
             data: { user_id: localStorage.getItem("userid"), fromdate: startDate, todate: endDate},
           }).then((res) =>{
             console.log("Monthly attendance", res);

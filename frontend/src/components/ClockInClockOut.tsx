@@ -32,6 +32,7 @@ export const ClockInAndOut = () => {
     await axios({
       method: "post",
       url: "http://localhost:5000/api/user/dayattendance",
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { user_id: localStorage.getItem("userid"), date: date},
     }).then(async (res) => {
 
@@ -72,6 +73,7 @@ export const ClockInAndOut = () => {
     await axios({
       method: "post",
       url: "http://localhost:5000/api/user/attendance",
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { user_id: localStorage.getItem("userid")},
     }).then((res) =>{
       console.log("Attendance response ============",res);
@@ -84,6 +86,7 @@ export const ClockInAndOut = () => {
       await axios({
         method: "post",
         url: 'http://localhost:5000/api/user/issuerequest',
+        headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
         data: { attendance_id: id, user_id: localStorage.getItem("userid")},
       }).then((res)=> {
         console.log("Issue request ============",res);
@@ -101,6 +104,7 @@ export const ClockInAndOut = () => {
     await axios({
       method: "post",
       url: 'http://localhost:5000/api/user/addattendance',
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { date: date, entry: entryTime, user_id: localStorage.getItem("userid"), clockIn:clockIn },
     }).then((res)=> {
       console.log("Add attendance =========",res);
@@ -111,11 +115,13 @@ export const ClockInAndOut = () => {
   }
 
   async function updateAttendance() {
+    const now = new Date();
     const exitTime =  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat")+ '\nlong:'+localStorage.getItem("long");
     const clockOut = now.getHours()*60 + now.getMinutes();
     await axios({
       method: "post",
       url: 'http://localhost:5000/api/user/updateattendance',
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { exit: exitTime, clockOut:clockOut, id:localStorage.getItem('attendanceid'), clockIn:localStorage.getItem('clockIn')},
     }).then((res)=> {
         console.log("update attendancae ============",res);

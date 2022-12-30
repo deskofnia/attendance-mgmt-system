@@ -41,6 +41,7 @@ export const UserList = () => {
     await axios({
       method: "put",
       url: `http://localhost:5000/api/editstatus?id=${id}`,
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { status: 'active'},
     }).then((res)=> {
       getData();
@@ -50,6 +51,7 @@ export const UserList = () => {
     await axios({
       method: "put",
       url: `http://localhost:5000/api/editstatus?id=${id}`,
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { status: 'inactive'},
     }).then((res)=> {
         getData();

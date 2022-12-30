@@ -18,6 +18,7 @@ export const IssueRequest = () => {
     await axios({
       method: "get",
       url: "http://localhost:5000/api/user/requestlistbyid",
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { user_id: localStorage.getItem("userid"), },
     }).then((res) =>{
       console.log("Req status=====",res);

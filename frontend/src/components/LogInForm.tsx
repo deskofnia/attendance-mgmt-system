@@ -27,6 +27,7 @@ export default function LogIn() {
       if(res.data.user.role ==="user")
       {
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("userid", res.data.user._id);
         const id = localStorage.getItem("userid");  
         
         if(res.data.user.status === "active") {
