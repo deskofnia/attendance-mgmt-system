@@ -4,18 +4,21 @@ import { useNavigate } from 'react-router-dom';
 import { IAttendance } from '../Interfaces/commonInterfaces';
 import './css/ClockInClockOut.css';
 
-
-
-
 export const ClockInAndOut = () => {
 
-  const now = new Date();
   // eslint-disable-next-line no-useless-concat
+  const now = new Date();
+  const date = now.getMonth()+1+'/'+now.getDate()+'/'+now.getFullYear();
 
-  
-  const date = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear();
+  const geolocation = async () =>{
+    navigator.geolocation.getCurrentPosition(position => {
+      const { latitude, longitude } = position.coords;
+      localStorage.setItem("lat", latitude.toString());
+      localStorage.setItem("long", longitude.toString());
+    });
+  }
+
   const navigate = useNavigate();
-
   // eslint-disable-next-line no-useless-concat
   const [attendance, setAttendance] = useState<IAttendance[]>([]);
 
@@ -25,8 +28,6 @@ export const ClockInAndOut = () => {
   useEffect(() => {
     getData();
   }, []);
-
- 
 
   const toggle = async () => {
     await axios({
@@ -39,31 +40,20 @@ export const ClockInAndOut = () => {
       console.log("Day attendance====", res);
 
       if(res.data.data.length === 0 ){
-        
-        navigator.geolocation.getCurrentPosition(async position => {
-          const { latitude, longitude } = position.coords;
-          localStorage.setItem("lat", latitude.toString());
-          localStorage.setItem("long", longitude.toString());
-        });
-
         if(buttonText==="Clock In")
         {
+          await geolocation();
           setButtonText("Clock Out");
           addAttendance(); 
         }
       }
       else{
-        await navigator.geolocation.getCurrentPosition(position => {
-          const { latitude, longitude } = position.coords;
-          localStorage.setItem("lat", latitude.toString());
-          localStorage.setItem("long", longitude.toString());
-        });
-
         if(buttonText==="Clock Out")
-          {  
-            setButtonText("Clock In");
-            updateAttendance()
-          }
+        {  
+          await geolocation();
+          setButtonText("Clock In");
+          updateAttendance()
+        }
       }
     });
           
@@ -98,9 +88,15 @@ export const ClockInAndOut = () => {
   }
 
   async function addAttendance () {
-    const entryTime =  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat")+ '\nlong:'+localStorage.getItem("long");
+
+    const now = new Date();
+    const date = now.getMonth()+1+'/'+now.getDate()+'/'+now.getFullYear();
+    const entryTime =  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat")+'\nlong:'+localStorage.getItem("long");
+    console.log("Entry Time=====", entryTime);
     const clockIn = now.getHours()*60 + now.getMinutes();
     localStorage.setItem("clockIn", clockIn.toString());
+
+    
     await axios({
       method: "post",
       url: 'http://localhost:5000/api/user/addattendance',
@@ -115,6 +111,7 @@ export const ClockInAndOut = () => {
   }
 
   async function updateAttendance() {
+
     const now = new Date();
     const exitTime =  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat")+ '\nlong:'+localStorage.getItem("long");
     const clockOut = now.getHours()*60 + now.getMinutes();

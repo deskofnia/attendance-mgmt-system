@@ -15,7 +15,7 @@ export const MonthlyAttendance = () => {
 
     useEffect(() => {
         getData();
-      }, []);
+    }, []);
     
       const getData = async () => {
         await axios({
@@ -43,7 +43,7 @@ export const MonthlyAttendance = () => {
     return (
         <div>
             <h1>Monthly Attendance</h1>
-            <button onClick={() => getMonthAttendance}>Get Attendance</button>
+            <button onClick={() => getMonthAttendance()}>Get Attendance</button>
             <div className='datebox'>
                 <div className='date1'>
                     <DatePicker 

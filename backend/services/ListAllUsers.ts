@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { User } from '../models/userModel';
 
 export default async function list(req: Request, res: Response) {
-    console.log("Query===>",req.query._id);
+    console.log("Query===>",req.body._id);
     await User.find()
     .then(user => {
         res.send({data:user, success:true, message:"User Found"});

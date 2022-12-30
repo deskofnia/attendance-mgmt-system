@@ -2,7 +2,9 @@ import { Request, Response } from 'express';
 import { Attendance } from '../models/attendanceModel';
 
 export default async function monthattendance(req: Request, res: Response) {
-    const { user_id, fromdate, todate } = req.body
+    const { user_id, fromdate, todate } = req.body;
+
+    console.log("Dates... ", fromdate, "=====", todate);
     
     await Attendance.find({user_id: user_id, date: { $gte:fromdate, $lte:todate}})
     .then(async (data) => {

@@ -6,19 +6,16 @@ dotenv.config({ path: '.env'})
 // load the environment variables from the .env file
 
 const auth = async (req: Request, res: Response, next: NextFunction) => {
-  if (req.headers.authorization) {
-    const token = req.headers.authorization.split(' ')[1]
-    console.log('token: ' + token)
-
-    
+  if (req.headers.authorization)
+  {
+    const token = req.headers.authorization.split(' ')[1];
+    // console.log('token: ' + token)
     try {
       if (token) {
-        const verify = jwt.verify(token, process.env.JWT_SECRET as string                    // keys.jwtSecret as string
-        ) as jwt.JwtPayload;
-        if (verify) {
-        console.log('verify: ' + JSON.stringify(verify));
-            req.query["_id"] = verify._id;
-     
+        const verify = jwt.verify(token, process.env.JWT_SECRET as string) as jwt.JwtPayload;
+        if (verify)
+        {
+          req.body["_id"] = verify._id;
           next();
         }
       }
@@ -33,6 +30,6 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
         error: "token-expired",
       })
     }
-};
+  };
 }
 export default auth;
