@@ -1,12 +1,14 @@
 import { Request, Response } from 'express';
 import { Attendance } from '../models/attendanceModel';
+import dayjs from 'dayjs';
 
 export default async function monthattendance(req: Request, res: Response) {
     const { user_id, fromdate, todate } = req.body;
 
-    console.log("Dates... ", fromdate, "=====", todate);
+    const formatedFromDate = dayjs(fromdate).format('MM/DD/YYYY');
+    const formatedToDate = dayjs(todate).format('MM/DD/YYYY');
     
-    await Attendance.find({user_id: user_id, date: { $gte:fromdate, $lte:todate}})
+    await Attendance.find({user_id: user_id, date: { $gte:formatedFromDate, $lte:formatedToDate}})
     .then(async (data) => {
         await Attendance.aggregate([
             {
