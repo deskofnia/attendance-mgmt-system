@@ -8,9 +8,9 @@ export const ClockInAndOut = () => {
 
   // eslint-disable-next-line no-useless-concat
   const now = new Date();
-  const date = now.getMonth()+1+'/'+now.getDate()+'/'+now.getFullYear();
+  const date = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear();
 
-  const geolocation = async () =>{
+  const geolocation = async () => {
     navigator.geolocation.getCurrentPosition(position => {
       const { latitude, longitude } = position.coords;
       localStorage.setItem("lat", latitude.toString());
@@ -44,7 +44,7 @@ export const ClockInAndOut = () => {
         {
           await geolocation();
           setButtonText("Clock Out");
-          addAttendance(); 
+          addAttendance();
         }
       }
       else{
@@ -52,7 +52,7 @@ export const ClockInAndOut = () => {
         {  
           await geolocation();
           setButtonText("Clock In");
-          updateAttendance()
+          updateAttendance();
         }
       }
     });
@@ -90,7 +90,7 @@ export const ClockInAndOut = () => {
   async function addAttendance () {
 
     const now = new Date();
-    const date = now.getMonth()+1+'/'+now.getDate()+'/'+now.getFullYear();
+    const date = now.getDate()+'-'+now.getMonth()+'-'+now.getFullYear();
     const entryTime =  'hrs:'+now.getHours() + ':' + 'mins:'+now.getMinutes()+'\nlat:'+localStorage.getItem("lat")+'\nlong:'+localStorage.getItem("long");
     console.log("Entry Time=====", entryTime);
     const clockIn = now.getHours()*60 + now.getMinutes();
