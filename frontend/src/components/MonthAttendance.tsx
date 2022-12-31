@@ -34,8 +34,8 @@ export const MonthlyAttendance = () => {
             data: { user_id: localStorage.getItem("userid"), fromdate: startDate, todate: endDate},
           }).then((res) =>{
             console.log("Monthly attendance", res);
-              setAttendance(res.data.data);
-          });
+            setAttendance(res.data.data);
+        });
       }
 
     return (
@@ -90,7 +90,6 @@ export const MonthlyAttendance = () => {
                                 <td>{data.entry}</td>
                                 <td>{data.exit}</td>
                                 <td>{data.status}</td>
-
                             </tr>
                         )
                     })
