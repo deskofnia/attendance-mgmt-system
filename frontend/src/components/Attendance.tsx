@@ -16,7 +16,7 @@ export const Attendance = () => {
         await axios({
           method: "post",
           url: "http://localhost:5000/api/user/attendance",
-        //   headers: { authorization: `Bearer ${localStorage.getItem("token")}`,id: localStorage.getItem("_id") },
+          headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
           data: { user_id: localStorage.getItem("userid")},
         }).then((res) =>{
             setAttendance(res.data.data);

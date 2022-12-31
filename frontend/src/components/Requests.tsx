@@ -23,9 +23,8 @@ export const Request = () => {
 
     
     useEffect(() => {
-        
-        getData();
-    }, []);
+      getData();
+    }, [request]);
 
     async function dashboard() {
       navigate(`/admin/${localStorage.getItem('adminId')}`);
@@ -36,7 +35,6 @@ export const Request = () => {
           method: "get",
           url: "http://localhost:5000/api/admin/requestlist",
           headers: { authorization: 'Bearer ' + localStorage.getItem("token")}
-
         }).then((res) =>{
           setRequests(res.data.data);
         });
@@ -48,12 +46,14 @@ export const Request = () => {
     await axios({
       method: "post",
       url: `http://localhost:5000/api/user/changerequest?id=${id}`,
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { status: 'Full Day'},
     }).then(async (res)=> {
-
+      console.log("Im inside accept req attendancae ============",res);
       await axios({
         method: "post",
         url: 'http://localhost:5000/api/user/updatereqattendance',
+        headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
         data: { id:localStorage.getItem('attendanceid'), status:'Full Day', totalHrs:9},
       }).then((res)=> {
           console.log("update req attendancae ============",res);
@@ -66,12 +66,14 @@ export const Request = () => {
     await axios({
       method: "post",
       url: `http://localhost:5000/api/user/changerequest?id=${id}`,
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { status: 'Half Day'},
     }).then(async (res)=> {
-
+      console.log("Im inside reject req attendancae ============",res);
       await axios({
         method: "post",
         url: 'http://localhost:5000/api/user/updatereqattendance',
+        headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
         data: { id:localStorage.getItem('attendanceid'), status:'Half Day', totalHrs:5},
       }).then((res)=> {
           console.log("update req attendancae ============",res);
@@ -85,11 +87,14 @@ export const Request = () => {
     await axios({
       method: "post",
       url: `http://localhost:5000/api/user/changerequest?id=${id}`,
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
       data: { status: 'pending'},
     }).then(async (res)=> {
+      console.log("Im inside reject pending attendancae ============",res);
       await axios({
         method: "post",
         url: 'http://localhost:5000/api/user/updatereqattendance',
+        headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
         data: { id:localStorage.getItem('attendanceid'), status:'Absent', totalHrs:0},
       }).then((res)=> {
           console.log("update req attendancae ============",res);
@@ -116,19 +121,19 @@ export const Request = () => {
             </thead>
             <tbody >
             {
-                request.map((user, index) => {
-                    return (
-                        <tr className='active-row' key={index}>
-                            <td>{index + 1}</td>
-                            <td>{user.user_id}</td>
-                            <td>{user.attendance_id}</td>
-                            <td>{user.status}</td>
-                            <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => acceptReq(request[index]?._id)} > Accept </button></td>
-                            <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => rejectReq(request[index]?._id)} > Reject </button></td>
-                            <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => pendingReq(request[index]?._id)}> Pending </button></td>
-                        </tr>
-                    )
-                })
+              request.map((user, index) => {
+                  return (
+                    <tr className='active-row' key={index}>
+                        <td>{index + 1}</td>
+                        <td>{user.user_id}</td>
+                        <td>{user.attendance_id}</td>
+                        <td>{user.status}</td>
+                        <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => acceptReq(request[index]?._id)} > Full Day </button></td>
+                        <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => rejectReq(request[index]?._id)} > Half Day </button></td>
+                        <td><button onClick={(e: React.SyntheticEvent<EventTarget>) => pendingReq(request[index]?._id)}> Pending </button></td>
+                    </tr>
+                  )
+              })
             }
             </tbody>
             <button onClick={dashboard} >Dashboard</button>

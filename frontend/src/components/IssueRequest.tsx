@@ -7,20 +7,21 @@ import './css/IssueRequest.css';
 
 export const IssueRequest = () => {
 
-  const [ request, setRequest] = useState<IRequest[]>([]);
+  const [request, setRequest] = useState<IRequest[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [request]);
 
   const getData = async ()=>{
     await axios({
-      method: "get",
+      method: "post",
       url: "http://localhost:5000/api/user/requestlistbyid",
-      data: { user_id: localStorage.getItem("userid"), },
+      headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
+      data: { user_id: localStorage.getItem("userid") },
     }).then((res) =>{
-      console.log("Req status=====",res);
+      // console.log("Req status=====",res);
       setRequest(res.data.data);
     });
   }
@@ -32,6 +33,7 @@ export const IssueRequest = () => {
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">UserID</th>
+                    <td scope='col'>Attendance Id</td>
                     <th scope="col">Request Id</th>
                     <th scope="col">Status</th>
                     <th></th>
@@ -45,6 +47,7 @@ export const IssueRequest = () => {
                             <td>{index + 1}</td>
                             <td>{data.user_id}</td>
                             <td>{data._id}</td>
+                            <td>{data.attendance_id}</td>
                             <td>{data.status}</td>
                         </tr>
                     )

@@ -21,17 +21,17 @@ const routes = Router();
 routes.post('/register', SignUp);
 routes.post('/login', LogIn);
 routes.get('/userslist', auth,ListUsers);
-routes.get('/user/finduser', FindOneUser);
+routes.get('/user/finduser',auth, FindOneUser);
 routes.get('/admin/requestlist',auth, ReqList);
-routes.post('/user/changerequest', ChangeRequest)
-routes.post('/user/issuerequest', IssueReq);
-routes.post('/user/attendance',AttendanceList);
+routes.post('/user/changerequest', auth, ChangeRequest)
+routes.post('/user/issuerequest', auth, IssueReq);
+routes.post('/user/attendance',auth, AttendanceList);
 routes.post('/user/monthlyattendance', MonthAttendance);
-routes.post('/user/dayattendance',DayAttendance);
-routes.post('user/requestlistbyid',ReqListById);
-routes.post('/user/addattendance',AddAttendance);
-routes.route('/user/updateattendance').post( UpdateAttendance);
-routes.route('/user/updatereqattendance').post(UpdateReqAttendance);
-routes.route('/editstatus').put(EditStatus);
+routes.post('/user/dayattendance',auth, DayAttendance);
+routes.post('/user/requestlistbyid',auth, ReqListById);
+routes.post('/user/addattendance',auth, AddAttendance);
+routes.route('/user/updateattendance').post(auth, UpdateAttendance);
+routes.route('/user/updatereqattendance').post(auth, UpdateReqAttendance);
+routes.route('/editstatus').put(auth, EditStatus);
 
 export default routes;

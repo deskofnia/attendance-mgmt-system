@@ -15,12 +15,13 @@ export const MonthlyAttendance = () => {
 
     useEffect(() => {
         getData();
-      }, []);
+    }, []);
     
       const getData = async () => {
         await axios({
           method: "post",
           url: "http://localhost:5000/api/user/attendance",
+          headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
           data: { user_id: localStorage.getItem("userid")},
         }).then((res) =>{
             setAttendance(res.data.data);
@@ -31,6 +32,7 @@ export const MonthlyAttendance = () => {
         await axios({
             method: "post",
             url: "http://localhost:5000/api/user/monthlyattendance",
+            headers: { authorization: 'Bearer ' + localStorage.getItem("token")},
             data: { user_id: localStorage.getItem("userid"), fromdate: startDate, todate: endDate},
           }).then((res) =>{
             console.log("Monthly attendance", res);
@@ -41,7 +43,7 @@ export const MonthlyAttendance = () => {
     return (
         <div>
             <h1>Monthly Attendance</h1>
-            <button onClick={() => getMonthAttendance}>Get Attendance</button>
+            <button onClick={() => getMonthAttendance()}>Get Attendance</button>
             <div className='datebox'>
                 <div className='date1'>
                     <DatePicker 
